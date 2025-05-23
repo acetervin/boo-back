@@ -63,7 +63,7 @@ export default function Contact() {
           <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-4">
             Get in Touch
           </h1>
-          <p className="text-xl text-gray-100 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Ready to book your perfect Kenyan getaway? Contact us through your preferred method
           </p>
         </div>
@@ -73,7 +73,7 @@ export default function Contact() {
           <div className="space-y-8">
             <div>
               <h2 className="font-playfair text-2xl font-semibold mb-6">Contact Information</h2>
-
+              
               <div className="space-y-6">
                 <div className="flex items-center">
                   <div className="bg-whatsapp w-12 h-12 rounded-full flex items-center justify-center mr-4">
@@ -81,7 +81,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold">WhatsApp</p>
-                    <a href="https://wa.me/254700000000" className="text-gray-100 hover:text-white transition-colors">
+                    <a href="https://wa.me/254700000000" className="text-gray-300 hover:text-white transition-colors">
                       +254 700 000 000
                     </a>
                   </div>
@@ -93,7 +93,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold">Phone</p>
-                    <a href="tel:+254700000000" className="text-gray-100 hover:text-white transition-colors">
+                    <a href="tel:+254700000000" className="text-gray-300 hover:text-white transition-colors">
                       +254 700 000 000
                     </a>
                   </div>
@@ -105,7 +105,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold">Email</p>
-                    <a href="mailto:info@kenyaluxuryvillas.com" className="text-gray-100 hover:text-white transition-colors">
+                    <a href="mailto:info@kenyaluxuryvillas.com" className="text-gray-300 hover:text-white transition-colors">
                       info@kenyaluxuryvillas.com
                     </a>
                   </div>
@@ -117,7 +117,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold">Office</p>
-                    <p className="text-gray-100">Westlands, Nairobi, Kenya</p>
+                    <p className="text-gray-300">Westlands, Nairobi, Kenya</p>
                   </div>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function Contact() {
               <h2 className="font-playfair text-2xl font-semibold text-deep-navy mb-6">
                 Send us a Message
               </h2>
-
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -253,7 +253,7 @@ export default function Contact() {
             <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4">
               Easy & Secure Payments
             </h2>
-            <p className="text-lg text-gray-100">
+            <p className="text-lg text-gray-300">
               Multiple payment options for your convenience
             </p>
           </div>
@@ -306,7 +306,7 @@ export default function Contact() {
           </div>
 
           <div className="text-center mt-8">
-            <p className="text-gray-100 flex items-center justify-center">
+            <p className="text-gray-300 flex items-center justify-center">
               <Shield className="h-5 w-5 text-terracotta mr-2" />
               All payments are secure and your booking is protected
             </p>
