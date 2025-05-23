@@ -63,7 +63,7 @@ export default function Contact() {
           <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-4">
             Get in Touch
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-white max-w-3xl mx-auto">
             Ready to book your perfect Kenyan getaway? Contact us through your preferred method
           </p>
         </div>
@@ -238,7 +238,7 @@ export default function Contact() {
                 <Button
                   type="submit"
                   disabled={contactMutation.isPending}
-                  className="w-full bg-terracotta hover:bg-orange-600 text-white py-4 text-lg"
+                  className="w-full bg-terracotta hover:bg-orange-600 text-white py-4 text-lg font-semibold"
                 >
                   {contactMutation.isPending ? "Sending..." : "Send Message"}
                 </Button>
