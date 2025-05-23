@@ -10,6 +10,16 @@ export default function Home() {
     queryKey: ["/api/properties?featured=true"],
   });
 
+  const { data: apartments, isLoading: apartmentsLoading } = useQuery<Property[]>({
+    queryKey: ["/api/properties", { category: "nairobi" }],
+    queryFn: () => fetch("/api/properties?category=nairobi").then(res => res.json()),
+  });
+
+  const { data: villas, isLoading: villasLoading } = useQuery<Property[]>({
+    queryKey: ["/api/properties", { category: "diani" }],
+    queryFn: () => fetch("/api/properties?category=diani").then(res => res.json()),
+  });
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -49,19 +59,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Properties Section */}
-      <section className="py-24 bg-slate-50">
+      {/* Nairobi Apartments Section */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950 mb-6">
-              Featured Properties
+              Nairobi Apartments
             </h2>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-              Handpicked luxury accommodations from bustling city centers to serene coastal retreats
+              Modern luxury apartments in Kenya's capital city, perfect for business travelers and urban explorers
             </p>
           </div>
 
-          {isLoading ? (
+          {apartmentsLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="bg-white rounded-2xl h-96 animate-pulse shadow-sm" />
@@ -69,16 +79,53 @@ export default function Home() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredProperties?.map((property) => (
+              {apartments?.slice(0, 3).map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))}
             </div>
           )}
 
           <div className="text-center mt-16">
-            <Link href="/properties">
-              <Button size="lg" className="bg-slate-950 hover:bg-slate-800 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105">
-                View All Properties
+            <Link href="/properties?category=nairobi">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105">
+                View All Apartments
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Beach Villas Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950 mb-6">
+              Beach Villas
+            </h2>
+            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+              Stunning oceanfront villas along Kenya's pristine coastline, ideal for relaxation and tropical getaways
+            </p>
+          </div>
+
+          {villasLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="bg-white rounded-2xl h-96 animate-pulse shadow-sm" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {villas?.slice(0, 3).map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-16">
+            <Link href="/properties?category=diani">
+              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105">
+                View All Villas
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

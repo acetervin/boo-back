@@ -10,6 +10,7 @@ import About from "@/pages/About";
 import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Navigation from "@/components/Navigation";
+import BackButton from "@/components/BackButton";
 import StickyContactButtons from "@/components/StickyContactButtons";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/not-found";
@@ -34,6 +35,7 @@ function App() {
       <TooltipProvider>
         <div className="min-h-screen bg-white">
           <Navigation />
+          <BackButton />
           <main>
             <Router />
           </main>
