@@ -18,10 +18,10 @@ export default function LoadingScreen() {
                 initial={{ rotate: i * 90 }}
                 animate={{ rotate: [i * 90, (i + 1) * 90] }}
                 transition={{
-                  duration: 2,
-                  repeat: Infinity,
+                  duration: 0.3,
+                  repeat: 1,
                   ease: "linear",
-                  delay: i * 0.2,
+                  delay: i * 0.1,
                 }}
               />
             ))}
@@ -32,8 +32,8 @@ export default function LoadingScreen() {
                 opacity: [0.3, 0.8, 0.3]
               }}
               transition={{
-                duration: 2,
-                repeat: Infinity,
+                duration: 0.3,
+                repeat: 1,
                 ease: "easeInOut"
               }}
             />
