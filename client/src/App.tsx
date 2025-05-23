@@ -9,8 +9,6 @@ import PropertyDetail from "@/pages/PropertyDetail";
 import About from "@/pages/About";
 import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
-import Terms from "@/pages/Terms";
-import Privacy from "@/pages/Privacy";
 import Navigation from "@/components/Navigation";
 import BackButton from "@/components/BackButton";
 import StickyContactButtons from "@/components/StickyContactButtons";
@@ -26,8 +24,6 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/gallery" component={Gallery} />
       <Route path="/contact" component={Contact} />
-      <Route path="/terms" component={Terms} />
-      <Route path="/privacy" component={Privacy} />
       <Route component={NotFound} />
     </Switch>
   );
