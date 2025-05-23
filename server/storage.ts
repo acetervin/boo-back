@@ -40,18 +40,7 @@ export class MemStorage implements IStorage {
 
   private seedProperties() {
     const sampleProperties: Omit<Property, 'id'>[] = [
-      {
-        name: "Ocean Paradise Villa",
-        description: "Stunning beachfront villa with infinity pool overlooking the Indian Ocean at Diani Beach. Perfect for families and groups seeking luxury by the sea.",
-        location: "Diani Beach, Kwale",
-        pricePerNight: "15000.00",
-        maxGuests: 6,
-        bedrooms: 3,
-        imageUrl: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Beach Access", "AC", "Pool", "Kitchen", "Parking"],
-        featured: true,
-        category: "diani"
-      },
+      // Apartments
       {
         name: "Westlands Executive Apartment",
         description: "Modern luxury apartment in Westlands with premium finishes, rooftop terrace, and stunning city views. Perfect for business travelers and urban stays.",
@@ -62,7 +51,69 @@ export class MemStorage implements IStorage {
         imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Gym Access", "Parking", "City View", "Kitchen", "24/7 Security"],
         featured: true,
-        category: "nairobi"
+        category: "apartments"
+      },
+      {
+        name: "Karen Heights Apartment",
+        description: "Elegant apartment in upscale Karen with garden views, modern furnishings, and access to exclusive amenities.",
+        location: "Karen, Nairobi",
+        pricePerNight: "12000.00",
+        maxGuests: 6,
+        bedrooms: 3,
+        imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Wi-Fi", "Garden View", "Balcony", "Kitchen", "Security", "Parking"],
+        featured: null,
+        category: "apartments"
+      },
+      // Villas
+      {
+        name: "Ocean Paradise Villa",
+        description: "Stunning beachfront villa with infinity pool overlooking the Indian Ocean at Diani Beach. Perfect for families and groups seeking luxury by the sea.",
+        location: "Diani Beach, Kwale",
+        pricePerNight: "25000.00",
+        maxGuests: 8,
+        bedrooms: 4,
+        imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Private Beach", "Infinity Pool", "Ocean View", "Wi-Fi", "AC", "Private Chef"],
+        featured: true,
+        category: "villas"
+      },
+      {
+        name: "Kilifi Creek Villa",
+        description: "Elegant villa overlooking Kilifi Creek with traditional Swahili architecture and modern luxury amenities.",
+        location: "Kilifi, Coast Province",
+        pricePerNight: "18000.00",
+        maxGuests: 6,
+        bedrooms: 3,
+        imageUrl: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Creek View", "Traditional Design", "Pool", "Wi-Fi", "Spacious Terrace", "Dhow Trips"],
+        featured: null,
+        category: "villas"
+      },
+      // Houses
+      {
+        name: "Lavington Family House",
+        description: "Spacious family house in quiet Lavington neighborhood, perfect for long-term stays and large families.",
+        location: "Lavington, Nairobi",
+        pricePerNight: "15000.00",
+        maxGuests: 10,
+        bedrooms: 5,
+        imageUrl: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Large Garden", "Family Room", "Wi-Fi", "Kitchen", "Parking", "Security"],
+        featured: true,
+        category: "houses"
+      },
+      {
+        name: "Runda Contemporary House",
+        description: "Modern house in prestigious Runda estate with beautiful landscaping and premium finishes.",
+        location: "Runda, Nairobi",
+        pricePerNight: "20000.00",
+        maxGuests: 8,
+        bedrooms: 4,
+        imageUrl: "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Modern Design", "Garden", "Wi-Fi", "Study Room", "Parking", "Gated Community"],
+        featured: null,
+        category: "houses"
       },
       {
         name: "Karen Gardens Apartment",

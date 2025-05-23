@@ -1,11 +1,11 @@
 export const propertyCategories = [
   { id: 'all', name: 'All Properties' },
-  { id: 'nairobi', name: 'Nairobi Apartments' },
+  { id: 'apartments', name: 'Apartments' },
+  { id: 'villas', name: 'Villas' },
+  { id: 'houses', name: 'House Rentals' },
+  { id: 'nairobi', name: 'Nairobi' },
   { id: 'diani', name: 'Diani Beach' },
   { id: 'kilifi', name: 'Kilifi Coast' },
-  { id: 'naivasha', name: 'Naivasha' },
-  { id: 'nanyuki', name: 'Nanyuki' },
-  { id: 'amboseli', name: 'Amboseli' },
 ];
 
 export const experiences = [

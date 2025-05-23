@@ -2,23 +2,43 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import PropertyCard from "@/components/PropertyCard";
-import { ChevronRight } from "lucide-react";
+import LoadingScreen from "@/components/LoadingScreen";
+import { ChevronRight, Building2, Home as HomeIcon, Castle } from "lucide-react";
+import { motion } from "framer-motion";
 import type { Property } from "@shared/schema";
 
-export default function Home() {
-  const { data: featuredProperties, isLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties?featured=true"],
-  });
+const PropertySkeleton = () => (
+  <div className="bg-white rounded-2xl h-96 animate-pulse shadow-sm">
+    <div className="bg-slate-200 h-64 rounded-t-2xl"></div>
+    <div className="p-6">
+      <div className="h-4 bg-slate-200 rounded mb-3"></div>
+      <div className="h-3 bg-slate-200 rounded mb-4 w-3/4"></div>
+      <div className="h-6 bg-slate-200 rounded mb-4 w-1/2"></div>
+    </div>
+  </div>
+);
 
+export default function Home() {
   const { data: apartments, isLoading: apartmentsLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties", { category: "nairobi" }],
-    queryFn: () => fetch("/api/properties?category=nairobi").then(res => res.json()),
+    queryKey: ["/api/properties", { category: "apartments" }],
+    queryFn: () => fetch("/api/properties?category=apartments").then(res => res.json()),
   });
 
   const { data: villas, isLoading: villasLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties", { category: "diani" }],
-    queryFn: () => fetch("/api/properties?category=diani").then(res => res.json()),
+    queryKey: ["/api/properties", { category: "villas" }],
+    queryFn: () => fetch("/api/properties?category=villas").then(res => res.json()),
   });
+
+  const { data: houses, isLoading: housesLoading } = useQuery<Property[]>({
+    queryKey: ["/api/properties", { category: "houses" }],
+    queryFn: () => fetch("/api/properties?category=houses").then(res => res.json()),
+  });
+
+  const isInitialLoading = apartmentsLoading && villasLoading && housesLoading;
+
+  if (isInitialLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="min-h-screen">
@@ -59,79 +79,239 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Nairobi Apartments Section */}
-      <section className="py-24 bg-white">
+      {/* Apartments Section */}
+      <motion.section 
+        className="py-24 bg-white"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950 mb-6">
-              Nairobi Apartments
-            </h2>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center justify-center mb-6">
+              <motion.div
+                className="bg-blue-100 p-4 rounded-full mr-4"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Building2 className="h-8 w-8 text-blue-600" />
+              </motion.div>
+              <h2 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950">
+                Modern Apartments
+              </h2>
+            </div>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-              Modern luxury apartments in Kenya's capital city, perfect for business travelers and urban explorers
+              Luxury urban living with premium amenities and stunning city views. Perfect for business travelers and city enthusiasts.
             </p>
-          </div>
+          </motion.div>
 
           {apartmentsLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl h-96 animate-pulse shadow-sm" />
+                <PropertySkeleton key={i} />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {apartments?.slice(0, 3).map((property) => (
-                <PropertyCard key={property.id} property={property} />
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              {apartments?.slice(0, 3).map((property, index) => (
+                <motion.div
+                  key={property.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <PropertyCard property={property} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
 
-          <div className="text-center mt-16">
-            <Link href="/properties?category=nairobi">
+          <motion.div 
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Link href="/properties?category=apartments">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105">
                 View All Apartments
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Beach Villas Section */}
-      <section className="py-24 bg-slate-50">
+      {/* Villas Section */}
+      <motion.section 
+        className="py-24 bg-slate-50"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950 mb-6">
-              Beach Villas
-            </h2>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center justify-center mb-6">
+              <motion.div
+                className="bg-emerald-100 p-4 rounded-full mr-4"
+                whileHover={{ scale: 1.1, rotate: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Castle className="h-8 w-8 text-emerald-600" />
+              </motion.div>
+              <h2 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950">
+                Luxury Villas
+              </h2>
+            </div>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-              Stunning oceanfront villas along Kenya's pristine coastline, ideal for relaxation and tropical getaways
+              Stunning oceanfront villas with private pools and beach access. Experience ultimate luxury by Kenya's pristine coastline.
             </p>
-          </div>
+          </motion.div>
 
           {villasLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl h-96 animate-pulse shadow-sm" />
+                <PropertySkeleton key={i} />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {villas?.slice(0, 3).map((property) => (
-                <PropertyCard key={property.id} property={property} />
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              {villas?.slice(0, 3).map((property, index) => (
+                <motion.div
+                  key={property.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <PropertyCard property={property} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
 
-          <div className="text-center mt-16">
-            <Link href="/properties?category=diani">
+          <motion.div 
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Link href="/properties?category=villas">
               <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105">
                 View All Villas
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* House Rentals Section */}
+      <motion.section 
+        className="py-24 bg-white"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center justify-center mb-6">
+              <motion.div
+                className="bg-purple-100 p-4 rounded-full mr-4"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <HomeIcon className="h-8 w-8 text-purple-600" />
+              </motion.div>
+              <h2 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950">
+                House Rentals
+              </h2>
+            </div>
+            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+              Spacious family homes in prestigious neighborhoods. Perfect for long-term stays, large families, and group accommodations.
+            </p>
+          </motion.div>
+
+          {housesLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, i) => (
+                <PropertySkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              {houses?.slice(0, 3).map((property, index) => (
+                <motion.div
+                  key={property.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <PropertyCard property={property} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+
+          <motion.div 
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Link href="/properties?category=houses">
+              <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105">
+                View All Houses
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
+      </motion.section>
 
       {/* Why Choose Us Section */}
       <section className="py-24 bg-white">
