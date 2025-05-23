@@ -9,16 +9,17 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="font-playfair text-4xl md:text-5xl font-bold text-deep-navy mb-6">
-              About Kenya Luxury Villas
+              About Kenya Stays
             </h1>
             <p className="text-lg text-gray-700 mb-6">
-              With over a decade of experience in Kenya's hospitality industry, we specialize in providing 
-              exceptional luxury accommodations across the country's most breathtaking destinations.
+              We are your premier destination for modern, comfortable stays in Kenya's most vibrant locations. 
+              Our properties are strategically placed in prime areas, ensuring you're always minutes away from 
+              shopping centers, restaurants, and business districts.
             </p>
             <p className="text-lg text-gray-700 mb-6">
-              From the pristine beaches of Diani and Malindi to the majestic landscapes of Mount Kenya and 
-              the wildlife-rich savannahs of Amboseli, our carefully curated properties offer unparalleled 
-              comfort and authentic Kenyan experiences.
+              Whether you're in Westlands, Kilimani, or Karen, our properties offer the perfect blend of 
+              contemporary living and convenience. Each location provides easy access to major highways, 
+              airports, and essential amenities, making your stay effortlessly comfortable.
             </p>
             
             <div className="grid grid-cols-2 gap-6 mb-8">
@@ -82,10 +83,10 @@ export default function About() {
         <div className="mt-20">
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-deep-navy mb-4">
-              Our Mission & Values
+              Why Choose Us
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We are committed to creating unforgettable experiences while preserving Kenya's natural beauty
+              Experience modern comfort with unmatched convenience and accessibility
             </p>
           </div>
 
