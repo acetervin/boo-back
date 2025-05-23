@@ -32,7 +32,7 @@ export default function PayPalButton({
 }: PayPalButtonProps) {
   const createOrder = async () => {
     const orderPayload = {
-      amount: convertCurrency(parseFloat(amount), "KES", "USD").toFixed(2),
+      amount: amount,
       currency: currency,
       intent: intent,
     };
