@@ -21,7 +21,15 @@ export default function Navigation() {
     <nav className="bg-white/95 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
+            {!isHomePage && (
+              <Link href="/">
+                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back
+                </Button>
+              </Link>
+            )}
             <Link href="/">
               <h1 className="font-space-grotesk text-2xl font-bold text-slate-950 cursor-pointer hover:text-blue-600 transition-colors">
                 Kenya Stays
@@ -83,15 +91,5 @@ export default function Navigation() {
         </div>
       </div>
     </nav>
-    {!isHomePage && (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-        <Link href="/">
-          <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
-          </Button>
-        </Link>
-      </div>
-    )}
   );
 }
