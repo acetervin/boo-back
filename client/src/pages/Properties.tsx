@@ -33,28 +33,28 @@ export default function Properties() {
   };
 
   return (
-    <div className="min-h-screen py-20 bg-white">
+    <div className="min-h-screen py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold text-deep-navy mb-4">
-            Our Premium Properties
+          <h1 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950 mb-6">
+            Premium Properties
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Choose from our carefully curated collection of luxury villas and apartments across Kenya's most desirable locations
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+            From modern Nairobi apartments to coastal villas, discover luxury accommodations across Kenya
           </p>
         </div>
 
         {/* Property Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
           {propertyCategories.map((category) => (
             <Button
               key={category.id}
               onClick={() => handleCategoryChange(category.id)}
               variant={selectedCategory === category.id ? "default" : "outline"}
-              className={`px-6 py-3 rounded-full transition-colors ${
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                 selectedCategory === category.id
-                  ? "bg-terracotta text-white hover:bg-orange-600"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-slate-950 text-white hover:bg-slate-800 scale-105"
+                  : "bg-white text-slate-700 hover:bg-slate-100 border-slate-200 hover:border-slate-300"
               }`}
             >
               {category.name}
@@ -66,7 +66,7 @@ export default function Properties() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-gray-200 rounded-xl h-96 animate-pulse" />
+              <div key={i} className="bg-white rounded-2xl h-96 animate-pulse shadow-sm" />
             ))}
           </div>
         ) : (
@@ -78,10 +78,21 @@ export default function Properties() {
             </div>
 
             {properties?.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-xl text-gray-600">
-                  No properties found for this category.
-                </p>
+              <div className="text-center py-16">
+                <div className="max-w-md mx-auto">
+                  <h3 className="font-space-grotesk text-xl font-semibold text-slate-950 mb-2">
+                    No properties found
+                  </h3>
+                  <p className="text-slate-600 mb-6">
+                    Try selecting a different category to see more options.
+                  </p>
+                  <Button
+                    onClick={() => handleCategoryChange('all')}
+                    className="bg-slate-950 hover:bg-slate-800 text-white rounded-full px-6"
+                  >
+                    View All Properties
+                  </Button>
+                </div>
               </div>
             )}
           </>
