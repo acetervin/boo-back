@@ -125,7 +125,7 @@ export class MemStorage implements IStorage {
         imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Garden View", "Parking", "AC", "Kitchen", "Shopping Nearby"],
         featured: true,
-        category: "nairobi"
+        category: "apartments"
       },
       {
         name: "Kilifi Creek Apartment",
@@ -173,7 +173,7 @@ export class MemStorage implements IStorage {
         imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Modern Design", "Parking", "AC", "Kitchen", "Quiet Area"],
         featured: false,
-        category: "nairobi"
+        category: "apartments"
       },
       {
         name: "Amboseli Safari Villa",
