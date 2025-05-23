@@ -19,7 +19,7 @@ export default function Gallery() {
           <h1 className="font-playfair text-4xl md:text-5xl font-bold text-deep-navy mb-4">
             Experiences & Gallery
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-800 max-w-3xl mx-auto">
             Discover the incredible experiences waiting for you across Kenya's diverse landscapes
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function Gallery() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {experiences.map((experience) => {
             const Icon = iconMap[experience.icon];
-            
+
             return (
               <Card key={experience.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <img 
@@ -39,7 +39,7 @@ export default function Gallery() {
                   <h3 className="font-playfair text-xl font-semibold text-deep-navy mb-3">
                     {experience.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-800 mb-4">
                     {experience.description}
                   </p>
                   <div className="flex items-center text-terracotta">
@@ -58,7 +58,7 @@ export default function Gallery() {
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-deep-navy mb-4">
               Kenya's Natural Beauty
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-800">
               A glimpse into the stunning landscapes and wildlife that make Kenya unique
             </p>
           </div>
