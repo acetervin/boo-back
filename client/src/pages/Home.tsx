@@ -15,28 +15,33 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat hero-gradient"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80')`
+            backgroundImage: `url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80')`
           }}
         />
+        <div className="absolute inset-0 hero-gradient" />
         <div className="relative z-10 flex items-center justify-center h-full">
-          <div className="text-center text-white px-4">
-            <h1 className="font-playfair text-5xl md:text-7xl font-bold mb-6">
-              Experience Luxury Stays in Kenya
+          <div className="text-center text-white px-4 max-w-5xl mx-auto">
+            <h1 className="font-space-grotesk text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              Luxury Stays in 
+              <span className="block text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text">
+                Modern Kenya
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              Discover breathtaking villas and apartments across Kenya's most stunning destinations
+            <p className="text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto font-inter opacity-90 leading-relaxed">
+              From contemporary Nairobi apartments to beachfront villas, discover premium accommodations that blend modern luxury with authentic Kenyan hospitality
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/properties">
-                <Button size="lg" className="bg-terracotta hover:bg-orange-600 text-white px-8 py-4 text-lg">
-                  View Villas
+                <Button size="lg" className="bg-white text-slate-950 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105">
+                  Explore Properties
+                  <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg">
-                  Contact Us
+                <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300">
+                  Get in Touch
                 </Button>
               </Link>
             </div>

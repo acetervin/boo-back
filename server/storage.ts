@@ -53,6 +53,42 @@ export class MemStorage implements IStorage {
         category: "diani"
       },
       {
+        name: "Westlands Executive Apartment",
+        description: "Modern luxury apartment in Westlands with premium finishes, rooftop terrace, and stunning city views. Perfect for business travelers and urban stays.",
+        location: "Westlands, Nairobi",
+        pricePerNight: "8500.00",
+        maxGuests: 4,
+        bedrooms: 2,
+        imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Wi-Fi", "Gym Access", "Parking", "City View", "Kitchen", "24/7 Security"],
+        featured: true,
+        category: "nairobi"
+      },
+      {
+        name: "Karen Gardens Apartment",
+        description: "Elegant two-bedroom apartment in the prestigious Karen area with lush garden views, modern amenities, and easy access to shopping centers.",
+        location: "Karen, Nairobi",
+        pricePerNight: "7500.00",
+        maxGuests: 4,
+        bedrooms: 2,
+        imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Wi-Fi", "Garden View", "Parking", "AC", "Kitchen", "Shopping Nearby"],
+        featured: true,
+        category: "nairobi"
+      },
+      {
+        name: "Kilifi Creek Apartment",
+        description: "Contemporary beachside apartment with ocean views and modern design. Perfect for couples and small families seeking coastal luxury.",
+        location: "Kilifi Creek, Kilifi",
+        pricePerNight: "9500.00",
+        maxGuests: 3,
+        bedrooms: 1,
+        imageUrl: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Wi-Fi", "Ocean View", "Beach Access", "AC", "Kitchen", "Balcony"],
+        featured: false,
+        category: "kilifi"
+      },
+      {
         name: "Naivasha Lakeside Retreat",
         description: "Serene lakeside villa with mountain views at Lake Naivasha. Ideal for relaxation and water activities with boat dock access.",
         location: "Lake Naivasha, Nakuru",
@@ -73,32 +109,20 @@ export class MemStorage implements IStorage {
         bedrooms: 5,
         imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Fireplace", "Safari", "Mountain View", "Kitchen", "Hiking"],
-        featured: true,
+        featured: false,
         category: "nanyuki"
       },
       {
-        name: "Westlands Executive Suite",
-        description: "Modern penthouse apartment with city skyline views in the heart of Nairobi's business district.",
-        location: "Westlands, Nairobi",
-        pricePerNight: "8500.00",
-        maxGuests: 4,
-        bedrooms: 2,
-        imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Gym Access", "Parking", "City View", "Kitchen", "24/7 Security"],
-        featured: false,
-        category: "nairobi"
-      },
-      {
-        name: "Malindi Heritage House",
-        description: "Traditional Swahili-style beach house in historic Malindi with rich cultural heritage and beach access.",
-        location: "Malindi, Kilifi",
-        pricePerNight: "11000.00",
+        name: "Runda Modern Apartment",
+        description: "Sophisticated apartment in the upscale Runda neighborhood with contemporary design, premium amenities, and serene environment.",
+        location: "Runda, Nairobi",
+        pricePerNight: "9000.00",
         maxGuests: 5,
         bedrooms: 3,
-        imageUrl: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Cultural Tours", "Snorkeling", "Beach Front", "Kitchen", "Garden"],
+        imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        amenities: ["Wi-Fi", "Modern Design", "Parking", "AC", "Kitchen", "Quiet Area"],
         featured: false,
-        category: "malindi"
+        category: "nairobi"
       },
       {
         name: "Amboseli Safari Villa",

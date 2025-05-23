@@ -1,37 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
-
 :root {
   --background: 0 0% 100%;
-  --foreground: 20 14.3% 4.1%;
-  --muted: 60 4.8% 95.9%;
-  --muted-foreground: 25 5.3% 44.7%;
+  --foreground: 210 40% 2%;
+  --muted: 210 30% 96%;
+  --muted-foreground: 215 20% 45%;
   --popover: 0 0% 100%;
-  --popover-foreground: 20 14.3% 4.1%;
+  --popover-foreground: 210 40% 2%;
   --card: 0 0% 100%;
-  --card-foreground: 20 14.3% 4.1%;
-  --border: 20 5.9% 90%;
-  --input: 20 5.9% 90%;
-  --primary: 24 66% 52%; /* Terracotta */
-  --primary-foreground: 0 0% 98%;
-  --secondary: 35 44% 69%; /* Sandy Beige */
-  --secondary-foreground: 24 9.8% 10%;
-  --accent: 60 4.8% 95.9%;
-  --accent-foreground: 24 9.8% 10%;
+  --card-foreground: 210 40% 2%;
+  --border: 214 20% 90%;
+  --input: 214 20% 90%;
+  --primary: 222 84% 4.9%; /* Modern Dark Blue */
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 84% 4.9%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 84% 4.9%;
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 60 9.1% 97.8%;
-  --ring: 20 14.3% 4.1%;
-  --radius: 0.5rem;
+  --destructive-foreground: 210 40% 98%;
+  --ring: 222 84% 4.9%;
+  --radius: 0.75rem;
   
-  /* Kenya-inspired custom colors */
-  --terracotta: 24 66% 52%; /* #D2691E */
-  --forest-green: 182 25% 25%; /* #2F4F4F */
-  --sandy-beige: 35 44% 69%; /* #F4A460 */
-  --deep-navy: 211 63% 23%; /* #1B365D */
-  --warm-gray: 30 23% 48%; /* #8B7355 */
+  /* Modern color palette */
+  --slate-950: 222 84% 4.9%; /* #020617 */
+  --slate-900: 222 47% 11%; /* #0f172a */
+  --slate-800: 215 28% 17%; /* #1e293b */
+  --slate-700: 215 20% 25%; /* #334155 */
+  --slate-600: 215 16% 35%; /* #475569 */
+  --slate-500: 215 14% 47%; /* #64748b */
+  --blue-600: 221 83% 53%; /* #2563eb */
+  --blue-500: 217 91% 60%; /* #3b82f6 */
+  --emerald-500: 142 76% 36%; /* #10b981 */
+  --emerald-600: 142 71% 45%; /* #059669 */
+  --amber-500: 45 93% 58%; /* #f59e0b */
   --whatsapp: 142 70% 49%; /* #25D366 */
   --mpesa: 45 100% 50%; /* #FFB800 */
 }
@@ -64,61 +70,109 @@
   }
 
   body {
-    @apply font-poppins antialiased bg-background text-foreground;
+    @apply font-inter antialiased bg-background text-foreground;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-space-grotesk;
   }
 }
 
 @layer utilities {
-  .font-playfair {
-    font-family: 'Playfair Display', serif;
+  .font-space-grotesk {
+    font-family: 'Space Grotesk', sans-serif;
   }
   
-  .font-poppins {
-    font-family: 'Poppins', sans-serif;
+  .font-inter {
+    font-family: 'Inter', sans-serif;
   }
 
-  .text-terracotta {
-    color: hsl(var(--terracotta));
+  .text-slate-950 {
+    color: hsl(var(--slate-950));
   }
   
-  .bg-terracotta {
-    background-color: hsl(var(--terracotta));
+  .bg-slate-950 {
+    background-color: hsl(var(--slate-950));
   }
   
-  .text-forest-green {
-    color: hsl(var(--forest-green));
+  .text-slate-900 {
+    color: hsl(var(--slate-900));
   }
   
-  .bg-forest-green {
-    background-color: hsl(var(--forest-green));
+  .bg-slate-900 {
+    background-color: hsl(var(--slate-900));
   }
   
-  .text-sandy-beige {
-    color: hsl(var(--sandy-beige));
+  .text-slate-800 {
+    color: hsl(var(--slate-800));
   }
   
-  .bg-sandy-beige {
-    background-color: hsl(var(--sandy-beige));
+  .bg-slate-800 {
+    background-color: hsl(var(--slate-800));
   }
   
-  .text-deep-navy {
-    color: hsl(var(--deep-navy));
+  .text-slate-700 {
+    color: hsl(var(--slate-700));
   }
   
-  .bg-deep-navy {
-    background-color: hsl(var(--deep-navy));
+  .bg-slate-700 {
+    background-color: hsl(var(--slate-700));
   }
   
-  .text-warm-gray {
-    color: hsl(var(--warm-gray));
+  .text-slate-600 {
+    color: hsl(var(--slate-600));
   }
   
-  .bg-warm-gray {
-    background-color: hsl(var(--warm-gray));
+  .bg-slate-600 {
+    background-color: hsl(var(--slate-600));
+  }
+  
+  .text-slate-500 {
+    color: hsl(var(--slate-500));
+  }
+  
+  .bg-slate-500 {
+    background-color: hsl(var(--slate-500));
+  }
+  
+  .text-blue-600 {
+    color: hsl(var(--blue-600));
+  }
+  
+  .bg-blue-600 {
+    background-color: hsl(var(--blue-600));
+  }
+  
+  .text-blue-500 {
+    color: hsl(var(--blue-500));
+  }
+  
+  .bg-blue-500 {
+    background-color: hsl(var(--blue-500));
+  }
+  
+  .text-emerald-500 {
+    color: hsl(var(--emerald-500));
+  }
+  
+  .bg-emerald-500 {
+    background-color: hsl(var(--emerald-500));
+  }
+  
+  .text-emerald-600 {
+    color: hsl(var(--emerald-600));
+  }
+  
+  .bg-emerald-600 {
+    background-color: hsl(var(--emerald-600));
+  }
+  
+  .text-amber-500 {
+    color: hsl(var(--amber-500));
+  }
+  
+  .bg-amber-500 {
+    background-color: hsl(var(--amber-500));
   }
   
   .text-whatsapp {
@@ -138,6 +192,12 @@
   }
 
   .hero-gradient {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+    background: linear-gradient(135deg, rgba(2, 6, 23, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.125);
   }
 }
