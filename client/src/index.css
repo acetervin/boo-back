@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 24 66% 52%; /* Terracotta */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 35 44% 69%; /* Sandy Beige */
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+  
+  /* Kenya-inspired custom colors */
+  --terracotta: 24 66% 52%; /* #D2691E */
+  --forest-green: 182 25% 25%; /* #2F4F4F */
+  --sandy-beige: 35 44% 69%; /* #F4A460 */
+  --deep-navy: 211 63% 23%; /* #1B365D */
+  --warm-gray: 30 23% 48%; /* #8B7355 */
+  --whatsapp: 142 70% 49%; /* #25D366 */
+  --mpesa: 45 100% 50%; /* #FFB800 */
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 24 66% 52%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-poppins antialiased bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer utilities {
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .text-terracotta {
+    color: hsl(var(--terracotta));
+  }
+  
+  .bg-terracotta {
+    background-color: hsl(var(--terracotta));
+  }
+  
+  .text-forest-green {
+    color: hsl(var(--forest-green));
+  }
+  
+  .bg-forest-green {
+    background-color: hsl(var(--forest-green));
+  }
+  
+  .text-sandy-beige {
+    color: hsl(var(--sandy-beige));
+  }
+  
+  .bg-sandy-beige {
+    background-color: hsl(var(--sandy-beige));
+  }
+  
+  .text-deep-navy {
+    color: hsl(var(--deep-navy));
+  }
+  
+  .bg-deep-navy {
+    background-color: hsl(var(--deep-navy));
+  }
+  
+  .text-warm-gray {
+    color: hsl(var(--warm-gray));
+  }
+  
+  .bg-warm-gray {
+    background-color: hsl(var(--warm-gray));
+  }
+  
+  .text-whatsapp {
+    color: hsl(var(--whatsapp));
+  }
+  
+  .bg-whatsapp {
+    background-color: hsl(var(--whatsapp));
+  }
+  
+  .text-mpesa {
+    color: hsl(var(--mpesa));
+  }
+  
+  .bg-mpesa {
+    background-color: hsl(var(--mpesa));
+  }
+
+  .hero-gradient {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+  }
+}
