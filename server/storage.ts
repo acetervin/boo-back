@@ -137,7 +137,7 @@ export class MemStorage implements IStorage {
         imageUrl: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Ocean View", "Beach Access", "AC", "Kitchen", "Balcony"],
         featured: false,
-        category: "kilifi"
+        category: "villas"
       },
       {
         name: "Naivasha Lakeside Retreat",
@@ -149,7 +149,7 @@ export class MemStorage implements IStorage {
         imageUrl: "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Fishing", "Game Drives", "Boat Dock", "Kitchen", "Fireplace"],
         featured: false,
-        category: "naivasha"
+        category: "houses"
       },
       {
         name: "Mount Kenya View Lodge",
@@ -161,7 +161,7 @@ export class MemStorage implements IStorage {
         imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Fireplace", "Safari", "Mountain View", "Kitchen", "Hiking"],
         featured: false,
-        category: "nanyuki"
+        category: "houses"
       },
       {
         name: "Runda Modern Apartment",
@@ -185,7 +185,7 @@ export class MemStorage implements IStorage {
         imageUrl: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         amenities: ["Wi-Fi", "Game Drives", "All Meals", "Game View", "Kitchen", "Safari Guides"],
         featured: true,
-        category: "amboseli"
+        category: "houses"
       }
     ];
 
