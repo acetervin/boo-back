@@ -3,6 +3,8 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ArrowLeft, Home } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "@/hooks/use-theme";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -15,21 +17,22 @@ const navItems = [
 export default function Navigation() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40 shadow-sm">
+    <nav className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-40 shadow-sm transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/">
-              <h1 className="font-space-grotesk text-2xl font-bold text-slate-950 cursor-pointer hover:text-blue-600 transition-colors">
+              <h1 className="font-space-grotesk text-2xl font-bold text-foreground cursor-pointer hover:text-primary transition-colors">
                 Kenya Stays
               </h1>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
                 <Button
@@ -37,8 +40,8 @@ export default function Navigation() {
                   size="sm"
                   className={`transition-all duration-200 ${
                     location === item.href 
-                      ? "bg-slate-950 text-white hover:bg-slate-800" 
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                      ? "bg-foreground text-background hover:bg-foreground/90" 
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
                   }`}
                 >
                   {item.href === "/" && <Home className="h-4 w-4 mr-2" />}
@@ -46,27 +49,36 @@ export default function Navigation() {
                 </Button>
               </Link>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Navigation */}
-          <div className="md:hidden">
+          <div className="flex md:hidden items-center space-x-2">
+            <ThemeToggle />
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-slate-600">
-                  <Menu className="h-6 w-6" />
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] bg-white">
-                <div className="flex flex-col space-y-2 mt-8">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background">
+                <nav className="flex flex-col gap-4">
+                  <Button
+                    variant="ghost"
+                    className="justify-start"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Close
+                  </Button>
                   {navItems.map((item) => (
                     <Link key={item.href} href={item.href}>
                       <Button
                         variant={location === item.href ? "default" : "ghost"}
-                        size="lg"
-                        className={`w-full justify-start transition-all duration-200 ${
+                        className={`w-full justify-start ${
                           location === item.href 
-                            ? "bg-slate-950 text-white" 
-                            : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                            ? "bg-foreground text-background hover:bg-foreground/90" 
+                            : "text-muted-foreground hover:text-foreground hover:bg-accent"
                         }`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
@@ -75,7 +87,7 @@ export default function Navigation() {
                       </Button>
                     </Link>
                   ))}
-                </div>
+                </nav>
               </SheetContent>
             </Sheet>
           </div>

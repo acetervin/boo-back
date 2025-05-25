@@ -1,279 +1,128 @@
-import { properties, bookings, contactMessages, type Property, type InsertProperty, type Booking, type InsertBooking, type ContactMessage, type InsertContactMessage } from "@shared/schema";
+import pg from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
-export interface IStorage {
-  // Properties
-  getProperties(): Promise<Property[]>;
-  getProperty(id: number): Promise<Property | undefined>;
-  getPropertiesByCategory(category: string): Promise<Property[]>;
-  getFeaturedProperties(): Promise<Property[]>;
-  createProperty(property: InsertProperty): Promise<Property>;
+const { Client } = pg;
+import { type Property, type InsertProperty, type Booking, type InsertBooking, type ContactMessage, type InsertContactMessage, } from "@shared/schema";
 
-  // Bookings
-  getBookings(): Promise<Booking[]>;
-  getBooking(id: number): Promise<Booking | undefined>;
-  getBookingsByProperty(propertyId: number): Promise<Booking[]>;
-  createBooking(booking: InsertBooking): Promise<Booking>;
-  updateBookingStatus(id: number, status: string): Promise<Booking | undefined>;
-
-  // Contact Messages
-  getContactMessages(): Promise<ContactMessage[]>;
-  createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
-}
-
-export class MemStorage implements IStorage {
-  private properties: Map<number, Property>;
-  private bookings: Map<number, Booking>;
-  private contactMessages: Map<number, ContactMessage>;
-  private currentPropertyId: number;
-  private currentBookingId: number;
-  private currentMessageId: number;
+export class PgStorage {
+  private client: Client;
 
   constructor() {
-    this.properties = new Map();
-    this.bookings = new Map();
-    this.contactMessages = new Map();
-    this.currentPropertyId = 1;
-    this.currentBookingId = 1;
-    this.currentMessageId = 1;
-    this.seedProperties();
-  }
-
-  private seedProperties() {
-    const sampleProperties: Omit<Property, 'id'>[] = [
-      // Apartments
-      {
-        name: "Westlands Executive Apartment",
-        description: "Modern luxury apartment in Westlands with premium finishes, rooftop terrace, and stunning city views. Perfect for business travelers and urban stays.",
-        location: "Westlands, Nairobi",
-        pricePerNight: "8500.00",
-        maxGuests: 4,
-        bedrooms: 2,
-        imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Gym Access", "Parking", "City View", "Kitchen", "24/7 Security"],
-        featured: true,
-        category: "apartments"
-      },
-      {
-        name: "Karen Heights Apartment",
-        description: "Elegant apartment in upscale Karen with garden views, modern furnishings, and access to exclusive amenities.",
-        location: "Karen, Nairobi",
-        pricePerNight: "12000.00",
-        maxGuests: 6,
-        bedrooms: 3,
-        imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Garden View", "Balcony", "Kitchen", "Security", "Parking"],
-        featured: null,
-        category: "apartments"
-      },
-      // Villas
-      {
-        name: "Ocean Paradise Villa",
-        description: "Stunning beachfront villa with infinity pool overlooking the Indian Ocean at Diani Beach. Perfect for families and groups seeking luxury by the sea.",
-        location: "Diani Beach, Kwale",
-        pricePerNight: "25000.00",
-        maxGuests: 8,
-        bedrooms: 4,
-        imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Private Beach", "Infinity Pool", "Ocean View", "Wi-Fi", "AC", "Private Chef"],
-        featured: true,
-        category: "villas"
-      },
-      {
-        name: "Kilifi Creek Villa",
-        description: "Elegant villa overlooking Kilifi Creek with traditional Swahili architecture and modern luxury amenities.",
-        location: "Kilifi, Coast Province",
-        pricePerNight: "18000.00",
-        maxGuests: 6,
-        bedrooms: 3,
-        imageUrl: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Creek View", "Traditional Design", "Pool", "Wi-Fi", "Spacious Terrace", "Dhow Trips"],
-        featured: null,
-        category: "villas"
-      },
-      // Houses
-      {
-        name: "Lavington Family House",
-        description: "Spacious family house in quiet Lavington neighborhood, perfect for long-term stays and large families.",
-        location: "Lavington, Nairobi",
-        pricePerNight: "15000.00",
-        maxGuests: 10,
-        bedrooms: 5,
-        imageUrl: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Large Garden", "Family Room", "Wi-Fi", "Kitchen", "Parking", "Security"],
-        featured: true,
-        category: "houses"
-      },
-      {
-        name: "Runda Contemporary House",
-        description: "Modern house in prestigious Runda estate with beautiful landscaping and premium finishes.",
-        location: "Runda, Nairobi",
-        pricePerNight: "20000.00",
-        maxGuests: 8,
-        bedrooms: 4,
-        imageUrl: "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Modern Design", "Garden", "Wi-Fi", "Study Room", "Parking", "Gated Community"],
-        featured: null,
-        category: "houses"
-      },
-      {
-        name: "Karen Gardens Apartment",
-        description: "Elegant two-bedroom apartment in the prestigious Karen area with lush garden views, modern amenities, and easy access to shopping centers.",
-        location: "Karen, Nairobi",
-        pricePerNight: "7500.00",
-        maxGuests: 4,
-        bedrooms: 2,
-        imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Garden View", "Parking", "AC", "Kitchen", "Shopping Nearby"],
-        featured: true,
-        category: "apartments"
-      },
-      {
-        name: "Kilifi Creek Apartment",
-        description: "Contemporary beachside apartment with ocean views and modern design. Perfect for couples and small families seeking coastal luxury.",
-        location: "Kilifi Creek, Kilifi",
-        pricePerNight: "9500.00",
-        maxGuests: 3,
-        bedrooms: 1,
-        imageUrl: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Ocean View", "Beach Access", "AC", "Kitchen", "Balcony"],
-        featured: false,
-        category: "villas"
-      },
-      {
-        name: "Naivasha Lakeside Retreat",
-        description: "Serene lakeside villa with mountain views at Lake Naivasha. Ideal for relaxation and water activities with boat dock access.",
-        location: "Lake Naivasha, Nakuru",
-        pricePerNight: "12500.00",
-        maxGuests: 8,
-        bedrooms: 4,
-        imageUrl: "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Fishing", "Game Drives", "Boat Dock", "Kitchen", "Fireplace"],
-        featured: false,
-        category: "houses"
-      },
-      {
-        name: "Mount Kenya View Lodge",
-        description: "Rustic mountain lodge with breathtaking views of Mount Kenya. Perfect for adventure seekers and nature lovers.",
-        location: "Nanyuki, Laikipia",
-        pricePerNight: "18000.00",
-        maxGuests: 10,
-        bedrooms: 5,
-        imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Fireplace", "Safari", "Mountain View", "Kitchen", "Hiking"],
-        featured: false,
-        category: "houses"
-      },
-      {
-        name: "Runda Modern Apartment",
-        description: "Sophisticated apartment in the upscale Runda neighborhood with contemporary design, premium amenities, and serene environment.",
-        location: "Runda, Nairobi",
-        pricePerNight: "9000.00",
-        maxGuests: 5,
-        bedrooms: 3,
-        imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Modern Design", "Parking", "AC", "Kitchen", "Quiet Area"],
-        featured: false,
-        category: "apartments"
-      },
-      {
-        name: "Amboseli Safari Villa",
-        description: "Luxury safari lodge with stunning views of Mount Kilimanjaro and abundant wildlife viewing opportunities.",
-        location: "Amboseli, Kajiado",
-        pricePerNight: "22000.00",
-        maxGuests: 12,
-        bedrooms: 6,
-        imageUrl: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        amenities: ["Wi-Fi", "Game Drives", "All Meals", "Game View", "Kitchen", "Safari Guides"],
-        featured: true,
-        category: "houses"
-      }
-    ];
-
-    sampleProperties.forEach(property => {
-      const id = this.currentPropertyId++;
-      this.properties.set(id, { ...property, id });
-    });
+    this.client = new Client({ connectionString: process.env.DATABASE_URL });
+    this.client.connect();
   }
 
   // Properties
   async getProperties(): Promise<Property[]> {
-    return Array.from(this.properties.values());
+    const res = await this.client.query("SELECT * FROM properties");
+    return res.rows;
   }
 
   async getProperty(id: number): Promise<Property | undefined> {
-    return this.properties.get(id);
+    const res = await this.client.query("SELECT * FROM properties WHERE id = $1", [id]);
+    return res.rows[0];
   }
 
   async getPropertiesByCategory(category: string): Promise<Property[]> {
-    return Array.from(this.properties.values()).filter(
-      property => property.category === category
-    );
+    const res = await this.client.query("SELECT * FROM properties WHERE category = $1", [category]);
+    return res.rows;
   }
 
   async getFeaturedProperties(): Promise<Property[]> {
-    return Array.from(this.properties.values()).filter(
-      property => property.featured
-    );
+    const res = await this.client.query("SELECT * FROM properties WHERE featured = true");
+    return res.rows;
   }
 
-  async createProperty(insertProperty: InsertProperty): Promise<Property> {
-    const id = this.currentPropertyId++;
-    const property: Property = { ...insertProperty, id };
-    this.properties.set(id, property);
-    return property;
+  async createProperty(property: InsertProperty): Promise<Property> {
+    const res = await this.client.query(
+      `INSERT INTO properties 
+        (name, description, location, price_per_night, max_guests, bedrooms, image_url, amenities, featured, category)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`,
+      [
+        property.name,
+        property.description,
+        property.location,
+        property.price_per_night,
+        property.max_guests,
+        property.bedrooms,
+        property.image_url,
+        property.amenities,
+        property.featured,
+        property.category
+      ]
+    );
+    return res.rows[0];
   }
 
   // Bookings
   async getBookings(): Promise<Booking[]> {
-    return Array.from(this.bookings.values());
+    const res = await this.client.query("SELECT * FROM bookings");
+    return res.rows;
   }
 
   async getBooking(id: number): Promise<Booking | undefined> {
-    return this.bookings.get(id);
+    const res = await this.client.query("SELECT * FROM bookings WHERE id = $1", [id]);
+    return res.rows[0];
   }
 
   async getBookingsByProperty(propertyId: number): Promise<Booking[]> {
-    return Array.from(this.bookings.values()).filter(
-      booking => booking.propertyId === propertyId
-    );
+    const res = await this.client.query("SELECT * FROM bookings WHERE property_id = $1", [propertyId]);
+    return res.rows;
   }
 
-  async createBooking(insertBooking: InsertBooking): Promise<Booking> {
-    const id = this.currentBookingId++;
-    const booking: Booking = { 
-      ...insertBooking, 
-      id,
-      createdAt: new Date()
-    };
-    this.bookings.set(id, booking);
-    return booking;
+  async createBooking(booking: InsertBooking): Promise<Booking> {
+    const res = await this.client.query(
+      `INSERT INTO bookings 
+        (property_id, guest_name, guest_email, guest_phone, check_in, check_out, total_amount, payment_method, payment_status, status, created_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,NOW()) RETURNING *`,
+      [
+        booking.propertyId,
+        booking.guestName,
+        booking.guestEmail,
+        booking.guestPhone,
+        booking.checkIn,
+        booking.checkOut,
+        booking.totalAmount,
+        booking.paymentMethod,
+        booking.paymentStatus,
+        booking.status
+      ]
+    );
+    return res.rows[0];
   }
 
   async updateBookingStatus(id: number, status: string): Promise<Booking | undefined> {
-    const booking = this.bookings.get(id);
-    if (booking) {
-      booking.status = status;
-      this.bookings.set(id, booking);
-      return booking;
-    }
-    return undefined;
+    const res = await this.client.query(
+      "UPDATE bookings SET status = $1 WHERE id = $2 RETURNING *",
+      [status, id]
+    );
+    return res.rows[0];
   }
 
   // Contact Messages
   async getContactMessages(): Promise<ContactMessage[]> {
-    return Array.from(this.contactMessages.values());
+    const res = await this.client.query("SELECT * FROM contact_messages");
+    return res.rows;
   }
 
-  async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
-    const id = this.currentMessageId++;
-    const message: ContactMessage = { 
-      ...insertMessage, 
-      id,
-      createdAt: new Date()
-    };
-    this.contactMessages.set(id, message);
-    return message;
+  async createContactMessage(message: InsertContactMessage): Promise<ContactMessage> {
+    const res = await this.client.query(
+      `INSERT INTO contact_messages 
+        (first_name, last_name, email, phone, property_interest, message, created_at)
+       VALUES ($1,$2,$3,$4,$5,$6,NOW()) RETURNING *`,
+      [
+        message.firstName,
+        message.lastName,
+        message.email,
+        message.phone,
+        message.propertyInterest,
+        message.message
+      ]
+    );
+    return res.rows[0];
   }
 }
 
-export const storage = new MemStorage();
+// Export this instead of MemStorage:
+export const storage = new PgStorage();

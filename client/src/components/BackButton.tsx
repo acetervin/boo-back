@@ -1,23 +1,32 @@
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Home } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function BackButton() {
   const [location] = useLocation();
+  const { theme } = useTheme();
   const isHomePage = location === "/";
 
   if (isHomePage) return null;
 
+  const handleBack = () => {
+    window.history.back();
+  };
+
   return (
-    <div className="bg-slate-50 border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <Link href="/">
-          <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
+    <div className="fixed left-4 top-20 z-30">
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={handleBack}
+        className="rounded-full w-10 h-10 bg-background/50 backdrop-blur-sm border border-border
+          text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all
+          shadow-sm hover:shadow-md"
+      >
+        <ArrowLeft className="h-5 w-5" />
+        <span className="sr-only">Go Back</span>
+      </Button>
     </div>
   );
 }

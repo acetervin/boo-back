@@ -1,8 +1,11 @@
 import { Switch, Route } from "wouter";
+import React from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/providers/theme-provider";
+import LoadingScreen from "@/components/LoadingScreen";
 import Home from "@/pages/Home";
 import Properties from "@/pages/Properties";
 import PropertyDetail from "@/pages/PropertyDetail";
@@ -13,6 +16,7 @@ import Navigation from "@/components/Navigation";
 import BackButton from "@/components/BackButton";
 import StickyContactButtons from "@/components/StickyContactButtons";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -29,23 +33,43 @@ function Router() {
   );
 }
 
-function App() {
+export default function App() {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // Simulate checking if all initial resources are loaded
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 4000); // Match the 4-second animation duration
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <ThemeProvider>
+        <LoadingScreen />
+      </ThemeProvider>
+    );
+  }
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen bg-white">
-          <Navigation />
-          <BackButton />
-          <main>
-            <Router />
-          </main>
-          <Footer />
-          <StickyContactButtons />
-          <Toaster />
-        </div>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+            <Navigation />
+            <ScrollToTop />
+            <main className="relative">
+              <BackButton />
+              <Router />
+              <StickyContactButtons />
+            </main>
+            <Footer />
+            <Toaster />
+          </div>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
-
-export default App;

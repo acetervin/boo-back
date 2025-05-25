@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import PropertyCard from "@/components/PropertyCard";
 import { propertyCategories } from "@/data/properties";
 import type { Property } from "@shared/schema";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function Properties() {
   const [location] = useLocation();
+  const { theme } = useTheme();
   const urlParams = new URLSearchParams(location.split('?')[1] || '');
   const initialCategory = urlParams.get('category') || 'all';
   
@@ -33,13 +35,13 @@ export default function Properties() {
   };
 
   return (
-    <div className="min-h-screen py-20 bg-slate-50">
+    <div className="min-h-screen py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-slate-950 mb-6">
+          <h1 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
             Premium Properties
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             From modern Nairobi apartments to coastal villas, discover luxury accommodations across Kenya
           </p>
         </div>
@@ -49,14 +51,13 @@ export default function Properties() {
           {propertyCategories.map((category) => (
             <Button
               key={category.id}
-              onClick={() => handleCategoryChange(category.id)}
               variant={selectedCategory === category.id ? "default" : "outline"}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                selectedCategory === category.id
-                  ? "bg-slate-950 text-white hover:bg-slate-800 scale-105"
-                  : "bg-white text-slate-700 hover:bg-slate-100 border-slate-200 hover:border-slate-300"
-              }`}
+              className="rounded-full"
+              onClick={() => handleCategoryChange(category.id)}
             >
+              {category.icon && (
+                <category.icon className="h-4 w-4 mr-2" />
+              )}
               {category.name}
             </Button>
           ))}
@@ -65,37 +66,29 @@ export default function Properties() {
         {/* Properties Grid */}
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white rounded-2xl h-96 animate-pulse shadow-sm" />
-            ))}
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {properties?.map((property) => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
-            </div>
-
-            {properties?.length === 0 && (
-              <div className="text-center py-16">
-                <div className="max-w-md mx-auto">
-                  <h3 className="font-space-grotesk text-xl font-semibold text-slate-950 mb-2">
-                    No properties found
-                  </h3>
-                  <p className="text-slate-600 mb-6">
-                    Try selecting a different category to see more options.
-                  </p>
-                  <Button
-                    onClick={() => handleCategoryChange('all')}
-                    className="bg-slate-950 hover:bg-slate-800 text-white rounded-full px-6"
-                  >
-                    View All Properties
-                  </Button>
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="animate-pulse">
+                <div className="bg-muted/50 h-64 rounded-2xl mb-4" />
+                <div className="space-y-3">
+                  <div className="h-4 bg-muted/50 rounded w-3/4" />
+                  <div className="h-4 bg-muted/50 rounded w-1/2" />
                 </div>
               </div>
-            )}
-          </>
+            ))}
+          </div>
+        ) : properties?.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-lg text-muted-foreground mb-4">No properties found in this category.</p>
+            <Button variant="outline" onClick={() => handleCategoryChange('all')}>
+              View All Properties
+            </Button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {properties?.map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))}
+          </div>
         )}
       </div>
     </div>

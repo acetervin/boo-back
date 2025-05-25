@@ -1,9 +1,29 @@
-
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function LoadingScreen() {
+  const controls = useAnimation();
+  const { theme } = useTheme();
+  
+  useEffect(() => {
+    controls.start({
+      opacity: [1, 0],
+      transition: { duration: 0.5, delay: 3.5 }
+    });
+  }, [controls]);
+
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center z-50">
+    <motion.div 
+      className={`fixed inset-0 flex items-center justify-center ${
+        theme === 'dark' 
+          ? 'bg-gradient-to-br from-amber-950 via-yellow-950 to-amber-900' 
+          : 'bg-gradient-to-br from-amber-100 via-yellow-100 to-amber-50'
+      } z-50`}
+      animate={controls}
+      initial={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="text-center">
         <motion.div
           className="relative"
@@ -11,65 +31,70 @@ export default function LoadingScreen() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Animated Circles */}
+          {/* Animated Logo */}
           <div className="relative">
             <motion.div
-              className="w-24 h-24 border-4 border-blue-500/30 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className={`w-36 h-36 border-[3px] ${
+                theme === 'dark' ? 'border-amber-700/30' : 'border-amber-300/30'
+              } rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
             />
             <motion.div
-              className="w-24 h-24 border-4 border-t-blue-500 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              className={`w-36 h-36 border-[3px] ${
+                theme === 'dark' ? 'border-amber-500' : 'border-amber-500'
+              } rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+              initial={{ rotate: 0 }}
               animate={{ rotate: 360 }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 2, ease: "linear", repeat: Infinity }}
             />
           </div>
 
-          {/* Logo and Text */}
+          {/* Text Animation */}
           <motion.div
-            className="mt-24 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="mt-24"
           >
-            <h2 className="font-space-grotesk text-3xl font-bold text-white mb-4">
-              Kenya Stays
-            </h2>
-            
-            <motion.div
-              className="flex space-x-2 justify-center mb-4"
+            <motion.h1
+              className={`text-3xl font-bold font-serif mb-2 ${
+                theme === 'dark' ? 'text-amber-200' : 'text-amber-900'
+              }`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
             >
-              {[0, 1, 2].map((i) => (
-                <motion.div
-                  key={i}
-                  className="w-2 h-2 bg-blue-500 rounded-full"
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 1, 0.5]
-                  }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    delay: i * 0.2
-                  }}
-                />
-              ))}
-            </motion.div>
-            
+              Kenya Luxury Villas
+            </motion.h1>
             <motion.p
-              className="text-slate-300"
+              className={`text-lg ${
+                theme === 'dark' ? 'text-amber-300/70' : 'text-amber-800/70'
+              }`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
             >
-              Loading your perfect stay...
+              Experience Luxury Living
             </motion.p>
+          </motion.div>
+
+          {/* Loading Progress */}
+          <motion.div
+            className="mt-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 0.5 }}
+          >
+            <div className={`text-sm ${
+              theme === 'dark' ? 'text-amber-400/60' : 'text-amber-700/60'
+            }`}>
+              Loading your experience...
+            </div>
           </motion.div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
