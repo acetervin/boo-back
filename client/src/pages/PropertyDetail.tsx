@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -15,34 +15,71 @@ const iconMap: Record<string, any> = {
   "Kitchen": Coffee,
   "Pool": Waves,
   "Beach Access": Waves,
-  "AC": "❄️",
-  "Fireplace": "🔥",
-  "Safari": "🦁",
-  "Mountain View": "🏔️",
-  "City View": "🏙️",
-  "Game View": "🦒",
-  "Fishing": "🎣",
-  "Game Drives": "🚙",
-  "Boat Dock": "⛵",
-  "Gym Access": "💪",
-  "24/7 Security": "🔒",
-  "Cultural Tours": "🏺",
-  "Snorkeling": "🤿",
-  "Garden": "🌺",
-  "All Meals": "🍽️",
-  "Safari Guides": "👨‍🏫",
-  "Hiking": "🥾"
+  "AC": undefined,
+  "Fireplace": undefined,
+  "Safari": undefined,
+  "Mountain View": undefined,
+  "City View": undefined,
+  "Game View": undefined,
+  "Fishing": undefined,
+  "Game Drives": undefined,
+  "Boat Dock": undefined,
+  "Gym Access": undefined,
+  "24/7 Security": undefined,
+  "Cultural Tours": undefined,
+  "Snorkeling": undefined,
+  "Garden": undefined,
+  "All Meals": undefined,
+  "Safari Guides": undefined,
+  "Hiking": undefined
 };
 
 export default function PropertyDetail() {
   const [match, params] = useRoute("/properties/:id");
   const propertyId = params?.id ? parseInt(params.id) : null;
   const [currentImage, setCurrentImage] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [displayedImages, setDisplayedImages] = useState<string[]>([]);
 
   const { data: property, isLoading, error } = useQuery<Property>({
     queryKey: [`/api/properties/${propertyId}`],
     enabled: !!propertyId,
   });
+
+  useEffect(() => {
+    if (property && property.categorized_images) {
+      let imagesToDisplay = property.categorized_images;
+      if (typeof imagesToDisplay === "string") {
+        try {
+          imagesToDisplay = JSON.parse(imagesToDisplay);
+        } catch {
+          imagesToDisplay = [];
+        }
+      }
+      if (imagesToDisplay.length > 0) {
+        // Only update displayedImages and currentImage if the selectedCategory actually changed
+        const categoryData = selectedCategory
+          ? imagesToDisplay.find((cat: any) => cat.category === selectedCategory)
+          : imagesToDisplay[0];
+        if (categoryData) {
+          setDisplayedImages(categoryData.images);
+        } else {
+          setDisplayedImages([]);
+        }
+        setCurrentImage(0);
+      } else {
+        setDisplayedImages([]);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [property, selectedCategory]);
+
+  // Optimize category button click to avoid unnecessary re-renders
+  const handleCategoryChange = (category: string) => {
+    if (category !== selectedCategory) {
+      setSelectedCategory(category);
+    }
+  };
 
   const handleWhatsAppBooking = () => {
     if (!property) return;
@@ -72,11 +109,13 @@ export default function PropertyDetail() {
     );
   }
 
+  const allCategories = (property as any).categorized_images?.map((cat: any) => cat.category) || [];
+
   return (
     <div className="bg-background min-h-screen pb-12">
       <div className="relative h-[60vh] md:h-[70vh]">
         <img
-          src={property.image_url}
+          src={displayedImages[currentImage] || property.image_url}
           alt={property.name}
           className="w-full h-full object-cover"
         />
@@ -89,15 +128,27 @@ export default function PropertyDetail() {
           <div className="lg:col-span-2 space-y-8">
             {/* Image Gallery */}
             <Card className="border-border bg-card overflow-hidden">
+              <div className="p-4 flex flex-wrap gap-2 justify-center">
+                {allCategories.map((category: string) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    onClick={() => handleCategoryChange(category)}
+                    className="text-sm"
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
               <div className="relative h-[50vh]">
                 <img
-                  src={property.images?.[currentImage] || property.image_url}
+                  src={displayedImages[currentImage] || property.image_url}
                   alt={`${property.name} - View ${currentImage + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="p-4 grid grid-cols-4 gap-2">
-                {property.images?.map((image, index) => (
+                {displayedImages.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImage(index)}

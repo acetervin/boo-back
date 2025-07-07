@@ -1,0 +1,2 @@
+ALTER TABLE "properties" ALTER COLUMN "categorized_images" SET DATA TYPE jsonb USING "categorized_images"::jsonb;--> statement-breakpoint
+ALTER TABLE "properties" ALTER COLUMN "categorized_images" SET DEFAULT '[]'::jsonb;

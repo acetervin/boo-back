@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, decimal, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, decimal, timestamp, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -12,6 +12,7 @@ export const properties = pgTable("properties", {
   bedrooms: integer("bedrooms").notNull(),
   image_url: text("image_url").notNull(),
   images: text("images").array(),
+  categorized_images: jsonb("categorized_images").notNull().default([]),
   amenities: text("amenities").array().notNull(),
   featured: boolean("featured").default(false),
   category: text("category").notNull(), // 'diani', 'naivasha', 'nanyuki', 'nairobi', etc.
@@ -57,7 +58,7 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).om
   createdAt: true,
 });
 
-export type Property = typeof properties.$inferSelect;
+export type Property = typeof properties.$inferSelect & { categorized_images?: { category: string; images: string[] }[]; };
 export type InsertProperty = z.infer<typeof insertPropertySchema>;
 export type Booking = typeof bookings.$inferSelect;
 export type InsertBooking = z.infer<typeof insertBookingSchema>;

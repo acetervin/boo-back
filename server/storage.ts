@@ -37,8 +37,8 @@ export class PgStorage {
   async createProperty(property: InsertProperty): Promise<Property> {
     const res = await this.client.query(
       `INSERT INTO properties 
-        (name, description, location, price_per_night, max_guests, bedrooms, image_url, amenities, featured, category)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *`,
+        (name, description, location, price_per_night, max_guests, bedrooms, image_url, images, amenities, featured, category, categorized_images)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *`,
       [
         property.name,
         property.description,
@@ -47,9 +47,11 @@ export class PgStorage {
         property.max_guests,
         property.bedrooms,
         property.image_url,
+        property.images || [],
         property.amenities,
         property.featured,
-        property.category
+        property.category,
+        property.categorized_images || []
       ]
     );
     return res.rows[0];
