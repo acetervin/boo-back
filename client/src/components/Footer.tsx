@@ -83,8 +83,17 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border">
-          <div className="text-center text-muted-foreground">
+         <div className="flex flex-col sm:flex-row items-center justify-between text-muted-foreground text-sm">
             <p>&copy; {new Date().getFullYear()} Kenya Luxury Villas. All rights reserved.</p>
+            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+              <Link href="/privacy">
+                <span className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</span>
+              </Link>
+              <span className="text-border">|</span>
+              <Link href="/terms">
+                <span className="hover:text-primary transition-colors cursor-pointer">Terms of Service</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

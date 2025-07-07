@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import PropertyCard from "@/components/PropertyCard";
+import PropertySkeleton from "@/components/ui/PropertySkeleton";
 import { propertyCategories } from "@/data/properties";
 import type { Property } from "@shared/schema";
 import { useTheme } from "@/hooks/use-theme";
@@ -67,13 +68,7 @@ export default function Properties() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="animate-pulse">
-                <div className="bg-muted/50 h-64 rounded-2xl mb-4" />
-                <div className="space-y-3">
-                  <div className="h-4 bg-muted/50 rounded w-3/4" />
-                  <div className="h-4 bg-muted/50 rounded w-1/2" />
-                </div>
-              </div>
+              <PropertySkeleton key={i} />
             ))}
           </div>
         ) : properties?.length === 0 ? (

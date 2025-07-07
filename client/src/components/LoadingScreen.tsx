@@ -87,10 +87,10 @@ export default function LoadingScreen() {
             animate={{ opacity: 1 }}
             transition={{ delay: 2, duration: 0.5 }}
           >
-            <div className={`text-sm ${
+            <div className={`text-lg ${
               theme === 'dark' ? 'text-amber-400/60' : 'text-amber-700/60'
             }`}>
-              Loading your experience...
+              Loading your stay...
             </div>
           </motion.div>
         </motion.div>

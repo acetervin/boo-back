@@ -2,20 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import PropertyCard from "@/components/PropertyCard";
+import PropertySkeleton from "@/components/ui/PropertySkeleton";
 import { ChevronRight, Building2, Home as HomeIcon, Castle } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Property } from "@shared/schema";
-
-const PropertySkeleton = () => (
-  <div className="bg-card rounded-2xl h-96 animate-pulse shadow-sm border border-border">
-    <div className="bg-muted h-64 rounded-t-2xl"></div>
-    <div className="p-6">
-      <div className="h-4 bg-muted rounded mb-3"></div>
-      <div className="h-3 bg-muted rounded mb-4 w-3/4"></div>
-      <div className="h-6 bg-muted rounded mb-4 w-1/2"></div>
-    </div>
-  </div>
-);
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },

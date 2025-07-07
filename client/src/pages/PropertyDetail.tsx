@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Users, Bed, Wifi, Car, Coffee, Waves, MessageCircle, Phone, Mail, Shield } from "lucide-react";
 import PayPalButton from "@/components/PayPalButton";
+import MpesaButton from "@/components/MpesaButton";
 import type { Property } from "@shared/schema";
 
 // Icon mapping object
@@ -185,11 +186,18 @@ export default function PropertyDetail() {
                 </div>
 
                 <div className="space-y-4">
-                  <PayPalButton 
-                    amount={property.price_per_night}
-                    currency="USD"
-                    intent="capture"
-                  />
+                  <div className="flex space-x-4">
+                    <PayPalButton 
+                      amount={property.price_per_night}
+                      currency="USD"
+                      intent="capture"
+                    />
+                    <MpesaButton
+                      amount={property.price_per_night}
+                      currency="KES"
+                      intent="capture"
+                    />
+                  </div>
                   
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">

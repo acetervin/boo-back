@@ -1,4 +1,4 @@
-import pg from "pg";
+import pg, { Client as PgClient } from "pg";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -6,7 +6,7 @@ const { Client } = pg;
 import { type Property, type InsertProperty, type Booking, type InsertBooking, type ContactMessage, type InsertContactMessage, } from "@shared/schema";
 
 export class PgStorage {
-  private client: Client;
+  private client: PgClient;
 
   constructor() {
     this.client = new Client({ connectionString: process.env.DATABASE_URL });
