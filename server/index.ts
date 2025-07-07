@@ -66,3 +66,5 @@ app.use((req, res, next) => {
     log(`serving on port ${port}`);
   });
 })();
+
+// This is the main entry point for the server.

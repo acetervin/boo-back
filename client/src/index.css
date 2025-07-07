@@ -39,7 +39,6 @@
   --emerald-600: 142 71% 45%; /* #059669 */
   --amber-500: 45 93% 58%; /* #f59e0b */
   --whatsapp: 142 70% 49%; /* #25D366 */
-  --mpesa: 45 100% 50%; /* #FFB800 */
 }
 
 .dark {
@@ -181,14 +180,6 @@
   
   .bg-whatsapp {
     background-color: hsl(var(--whatsapp));
-  }
-  
-  .text-mpesa {
-    color: hsl(var(--mpesa));
-  }
-  
-  .bg-mpesa {
-    background-color: hsl(var(--mpesa));
   }
 
   .hero-gradient {

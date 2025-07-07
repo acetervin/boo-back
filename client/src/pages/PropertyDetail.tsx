@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Users, Bed, Wifi, Car, Coffee, Waves, MessageCircle, Phone, Mail, Shield } from "lucide-react";
 import PayPalButton from "@/components/PayPalButton";
-import MpesaButton from "@/components/MpesaButton";
 import type { Property } from "@shared/schema";
 
 // Icon mapping object
@@ -190,12 +189,7 @@ export default function PropertyDetail() {
                     <PayPalButton 
                       amount={property.price_per_night}
                       currency="USD"
-                      intent="capture"
-                    />
-                    <MpesaButton
-                      amount={property.price_per_night}
-                      currency="KES"
-                      intent="capture"
+                      intent="CAPTURE"
                     />
                   </div>
                   
