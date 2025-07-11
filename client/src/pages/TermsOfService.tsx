@@ -1,8 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-background py-20">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      className="min-h-screen py-20 bg-background"
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="bg-card border-border">
           <CardContent className="p-8">
@@ -90,6 +96,6 @@ export default function TermsOfService() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </motion.div>
   );
 }

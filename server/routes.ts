@@ -2,8 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema } from "@shared/schema";
-import { createPaypalOrder, capturePaypalOrder, loadPaypalDefault } from "./paypal";
-import { loadMpesaSetup, createMpesaOrder, captureMpesaOrder } from "./mpesa";
+// import { createPaypalOrder, capturePaypalOrder, loadPaypalDefault } from "./paypal";
+//import { loadMpesaSetup, createMpesaOrder, captureMpesaOrder } from "./mpesa";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Properties routes
@@ -96,21 +96,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // PayPal routes
-  app.get("/api/paypal/setup", async (req, res) => {
-    await loadPaypalDefault(req, res);
-  });
-
-  app.post("/api/paypal/order", async (req, res) => {
-    // Request body should contain: { intent, amount, currency }
-    await createPaypalOrder(req, res);
-  });
-
-  app.post("/api/paypal/order/:orderID/capture", async (req, res) => {
-    await capturePaypalOrder(req, res);
-  });
-
-  // Mpesa routes
+ {/*  Mpesa routes
   app.get("/api/mpesa/setup", async (req, res) => {
     await loadMpesaSetup(req, res);
   });
@@ -122,19 +108,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/mpesa/order/:orderID/capture", async (req, res) => {
     await captureMpesaOrder(req, res);
   });
-
-  // PayPal button routes (for the component)
-  app.get("/setup", async (req, res) => {
-    await loadPaypalDefault(req, res);
-  });
-
-  app.post("/order", async (req, res) => {
-    await createPaypalOrder(req, res);
-  });
-
-  app.post("/order/:orderID/capture", async (req, res) => {
-    await capturePaypalOrder(req, res);
-  });
+*/}
 
   // WhatsApp booking helper
   app.post("/api/whatsapp-booking", async (req, res) => {

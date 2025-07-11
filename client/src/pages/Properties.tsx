@@ -7,6 +7,7 @@ import PropertySkeleton from "@/components/ui/PropertySkeleton";
 import { propertyCategories } from "@/data/properties";
 import type { Property } from "@shared/schema";
 import { useTheme } from "@/hooks/use-theme";
+import { motion } from "framer-motion";
 
 export default function Properties() {
   const [location] = useLocation();
@@ -36,7 +37,12 @@ export default function Properties() {
   };
 
   return (
-    <div className="min-h-screen py-20 bg-background">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      className="min-h-screen py-20 bg-background"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="font-space-grotesk text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
@@ -86,6 +92,6 @@ export default function Properties() {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

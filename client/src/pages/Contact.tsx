@@ -10,6 +10,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { MessageCircle, Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube, Shield, Smartphone, CreditCard, DollarSign } from "lucide-react";
 import type { InsertContactMessage } from "@shared/schema";
 import { useTheme } from "@/hooks/use-theme";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -59,7 +60,12 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen py-20 bg-background">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      className="min-h-screen py-20 bg-background"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -265,6 +271,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

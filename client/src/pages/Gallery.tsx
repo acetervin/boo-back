@@ -2,6 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { experiences } from "@/data/properties";
 import { Binoculars, Ship, Mountain, Users, Egg, Plane } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import Masonry from "react-masonry-css";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 
 const iconMap: Record<string, any> = {
   binoculars: Binoculars,
@@ -14,80 +17,75 @@ const iconMap: Record<string, any> = {
 
 export default function Gallery() {
   const { theme } = useTheme();
-  
+  // Masonry breakpoints
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1
+  };
+
+  // Fetch all properties
+  const { data: properties, isLoading } = useQuery({
+    queryKey: ["/api/properties"],
+    queryFn: async () => {
+      const res = await fetch("/api/properties");
+      if (!res.ok) throw new Error("Failed to fetch properties");
+      return res.json();
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  // Collect all images from properties
+  let allImages: { url: string; title: string }[] = [];
+  if (properties && Array.isArray(properties)) {
+    properties.forEach((prop: any) => {
+      if (prop.image_url) allImages.push({ url: prop.image_url, title: prop.name });
+      if (Array.isArray(prop.images)) {
+        prop.images.forEach((img: string, idx: number) => {
+          allImages.push({ url: img, title: `${prop.name} #${idx + 1}` });
+        });
+      }
+    });
+  }
+  // Shuffle and pick 30 random images
+  function getRandomImages(arr: { url: string; title: string }[], n: number) {
+    const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, n);
+  }
+  const masonryImages = getRandomImages(allImages, 30);
+
   return (
-    <div className="min-h-screen py-20 bg-background">
+    <div
+      className="min-h-screen py-20 bg-background"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Experiences & Gallery
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover the incredible experiences waiting for you across Kenya's diverse landscapes
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {experiences.map((experience) => {
-            const Icon = iconMap[experience.icon];
-            
-            return (
-              <Card 
-                key={experience.id} 
-                className="bg-card rounded-xl overflow-hidden group hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="relative">
-                  <img 
-                    src={experience.imageUrl} 
-                    alt={experience.title}
-                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="font-playfair text-xl font-semibold text-foreground mb-3">
-                    {experience.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    {experience.description}
-                  </p>
-                  <div className="flex items-center text-primary">
-                    {Icon && <Icon className="h-4 w-4 mr-2" />}
-                    <span className="font-medium">{experience.feature}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Additional Gallery Section */}
-        <div className="mt-32 text-center">
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-16">
-            Featured Properties
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {experiences.map((item) => (
-              <div 
-                key={item.id} 
-                className="relative aspect-square group overflow-hidden rounded-lg"
+        {/* Masonry Gallery */}
+        {isLoading ? (
+          <div className="text-muted-foreground">Loading images...</div>
+        ) : (
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="flex gap-6"
+            columnClassName="masonry-column"
+          >
+            {masonryImages.map((img, i) => (
+              <div
+                key={i}
+                className="mb-6 rounded-xl overflow-hidden bg-card shadow-lg group transform transition duration-700 hover:scale-105 hover:shadow-2xl"
               >
                 <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  src={img.url}
+                  alt={img.title}
+                  className="w-full object-cover h-64 transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-white font-medium text-sm truncate">
-                      {item.title}
-                    </h3>
-                  </div>
+                <div className="p-2 text-center">
+                  <span className="text-xs text-muted-foreground">{img.title}</span>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
+          </Masonry>
+        )}
       </div>
     </div>
   );

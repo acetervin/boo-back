@@ -84,7 +84,6 @@ export default function MpesaButton({ amount, currency, intent }: MpesaButtonPro
           "Processing..."
         ) : (
           <>
-            
             <span className="font-bold text-lg text-gray-800">
               M-<span className="text-green-600">PESA</span>
             </span>

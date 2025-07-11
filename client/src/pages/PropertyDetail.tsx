@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Users, Bed, Wifi, Car, Coffee, Waves, MessageCircle, Phone, Mail, Shield } from "lucide-react";
-import PayPalButton from "@/components/PayPalButton";
+// import PayPalButton from "@/components/PayPalButton";
 import type { Property } from "@shared/schema";
 
 // Icon mapping object
@@ -235,6 +235,7 @@ export default function PropertyDetail() {
                   <span className="text-muted-foreground">per night</span>
                 </div>
 
+                {/*
                 <div className="space-y-4">
                   <div className="flex space-x-4">
                     <PayPalButton 
@@ -243,7 +244,7 @@ export default function PropertyDetail() {
                       intent="CAPTURE"
                     />
                   </div>
-                  
+                  // Mpesa integration would go here
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
                       <span className="w-full border-t border-border" />
@@ -252,7 +253,6 @@ export default function PropertyDetail() {
                       <span className="bg-card px-2 text-muted-foreground">Or contact us</span>
                     </div>
                   </div>
-
                   <Button 
                     variant="outline" 
                     onClick={handleWhatsAppBooking}
@@ -261,7 +261,37 @@ export default function PropertyDetail() {
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Book via WhatsApp
                   </Button>
-
+                  <div className="flex flex-col space-y-2">
+                    <a
+                      href="tel:+254700000000"
+                      className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      +254 700 000 000
+                    </a>
+                    <a
+                      href="mailto:info@kenyaluxuryvillas.com"
+                      className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Mail className="h-4 w-4 mr-2" />
+                      info@kenyaluxuryvillas.com
+                    </a>
+                  </div>
+                </div>
+                */}
+                <div className="space-y-4">
+                  <div className="text-center text-base text-muted-foreground">
+                    <strong>PayPal</strong>,<strong>Bank</strong>,<strong>Mpesa</strong> and other payment methods are supported.<br />
+                    Please book via WhatsApp for payment instructions and confirmation.
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    onClick={handleWhatsAppBooking}
+                    className="w-full"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    Book via WhatsApp
+                  </Button>
                   <div className="flex flex-col space-y-2">
                     <a
                       href="tel:+254700000000"
