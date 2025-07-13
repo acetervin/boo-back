@@ -6,160 +6,6 @@ const { Client } = pkg;
 
 const client = new Client({ connectionString: process.env.DATABASE_URL });
 
-const categorizedImagesWestlands = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1464983953574-0892a716854b"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1519974719765-e6559eac2575"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1504674900247-0877df9cc836"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1465101046530-73398c7f28ca"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1464983953574-0892a716854b"] }
-]);
-
-const categorizedImagesKaren = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1519974719765-e6559eac2575"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1504674900247-0877df9cc836"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1504674900247-0877df9cc836"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1465101046530-73398c7f28ca"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesOcean = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1512917774080-9991f1c4c750"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1512917774080-9991f1c4c750"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1512917774080-9991f1c4c750"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesKilifi = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesLavington = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesRunda = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1505843513577-22bb7d21e455"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1505843513577-22bb7d21e455"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1505843513577-22bb7d21e455"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesKarenGardens = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1512917774080-9991f1c4c750"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesKilifiCreek = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesKilifiCreekApartment = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1571896349842-33c89424de2d"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1571896349842-33c89424de2d"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1571896349842-33c89424de2d"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesNaivasha = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1505691723518-36a5ac3be353"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1505691723518-36a5ac3be353"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1505691723518-36a5ac3be353"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
-const categorizedImagesMountKenya = JSON.stringify([
-  { category: "Bedroom", images: ["https://images.unsplash.com/photo-1578662996442-48f60103fc96"] },
-  { category: "Bathroom", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] },
-  { category: "Living Room", images: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6"] },
-  { category: "Dining Area", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Kitchen", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Balcony / Views", images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"] },
-  { category: "Playground", images: ["https://images.unsplash.com/photo-1578662996442-48f60103fc96"] },
-  { category: "Bar / Lounge", images: ["https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"] },
-  { category: "Gym", images: ["https://images.unsplash.com/photo-1519864600265-abb23847ef2c"] },
-  { category: "Exterior Building", images: ["https://images.unsplash.com/photo-1578662996442-48f60103fc96"] },
-  { category: "Parking Area", images: ["https://images.unsplash.com/photo-1507089947368-19c1da9775ae"] }
-]);
-
 const properties = [
   {
     name: "Westlands Executive Apartment",
@@ -178,7 +24,7 @@ const properties = [
     amenities: ["Wi-Fi", "Gym Access", "Parking", "City View", "Kitchen", "24/7 Security"],
     featured: true,
     category: "apartments",
-    categorized_images: categorizedImagesWestlands
+    categorized_images: []
   },
   {
     name: "Karen Heights Apartment",
@@ -197,7 +43,7 @@ const properties = [
     amenities: ["Wi-Fi", "Garden View", "Balcony", "Kitchen", "Security", "Parking"],
     featured: true,
     category: "apartments",
-    categorized_images: categorizedImagesKaren
+    categorized_images: []
   },
   {
     name: "Ocean Paradise Villa",
@@ -216,7 +62,7 @@ const properties = [
     amenities: ["Private Beach", "Infinity Pool", "Ocean View", "Wi-Fi", "AC", "Private Chef"],
     featured: true,
     category: "villas",
-    categorized_images: categorizedImagesOcean
+    categorized_images: []
   },
   {
     name: "Kilifi Creek Villa",
@@ -234,7 +80,7 @@ const properties = [
     amenities: ["Creek View", "Traditional Design", "Pool", "Wi-Fi", "Spacious Terrace", "Dhow Trips"],
     featured: false,
     category: "villas",
-    categorized_images: categorizedImagesKilifi
+    categorized_images: []
   },
   {
     name: "Lavington Family House",
@@ -252,7 +98,7 @@ const properties = [
     amenities: ["Large Garden", "Family Room", "Wi-Fi", "Kitchen", "Parking", "Security"],
     featured: true,
     category: "houses",
-    categorized_images: categorizedImagesLavington
+    categorized_images: []
   },
   {
     name: "Runda Contemporary House",
@@ -270,7 +116,7 @@ const properties = [
     amenities: ["Modern Design", "Garden", "Wi-Fi", "Study Room", "Parking", "Gated Community"],
     featured: false,
     category: "houses",
-    categorized_images: categorizedImagesRunda
+    categorized_images: []
   },
   {
     name: "Karen Gardens Apartment",
@@ -289,7 +135,7 @@ const properties = [
     amenities: ["Wi-Fi", "Garden View", "Parking", "AC", "Kitchen", "Shopping Nearby"],
     featured: true,
     category: "apartments",
-    categorized_images: categorizedImagesKarenGardens
+    categorized_images: []
   },
   {
     name: "Kilifi Creek Apartment",
@@ -307,7 +153,7 @@ const properties = [
     amenities: ["Wi-Fi", "Ocean View", "Beach Access", "AC", "Kitchen", "Balcony"],
     featured: false,
     category: "villas",
-    categorized_images: categorizedImagesKilifiCreekApartment
+    categorized_images: []
   },
   {
     name: "Naivasha Lakeside Retreat",
@@ -326,7 +172,7 @@ const properties = [
     amenities: ["Wi-Fi", "Fishing", "Game Drives", "Boat Dock", "Kitchen", "Fireplace"],
     featured: false,
     category: "houses",
-    categorized_images: categorizedImagesNaivasha
+    categorized_images: []
   },
   {
     name: "Mount Kenya View Lodge",
@@ -345,7 +191,7 @@ const properties = [
     amenities: ["Wi-Fi", "Fireplace", "Safari", "Mountain View", "Kitchen", "Hiking"],
     featured: false,
     category: "houses",
-    categorized_images: categorizedImagesMountKenya
+    categorized_images: []
   },
   {
     name: "Runda Modern Apartment",
@@ -364,7 +210,7 @@ const properties = [
     amenities: ["Wi-Fi", "Modern Design", "Parking", "AC", "Kitchen", "Quiet Area"],
     featured: false,
     category: "apartments",
-    categorized_images: categorizedImagesRunda
+    categorized_images: []
   },
   {
     name: "Amboseli Safari Villa",
@@ -383,7 +229,12 @@ const properties = [
     amenities: ["Wi-Fi", "Game Drives", "All Meals", "Game View", "Kitchen", "Safari Guides"],
     featured: true,
     category: "houses",
-    categorized_images: categorizedImagesWestlands
+    categorized_images: ["https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1490735891913-40897cdaafd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+
+    ]
   }
 ];
 
@@ -395,8 +246,8 @@ async function seed() {
 
   for (const property of properties) {
     await client.query(      `INSERT INTO properties
-        (name, description, location, price_per_night, max_guests, bedrooms, image_url, images, amenities, featured, category, categorized_images)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+        (name, description, location, price_per_night, max_guests, bedrooms, image_url, images, amenities, featured, category)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
       [
         property.name,
         property.description,
@@ -408,8 +259,7 @@ async function seed() {
         property.images || [],
         property.amenities,
         property.featured,
-        property.category,
-                property.categorized_images || [],
+        property.category
       ]
     );
   }

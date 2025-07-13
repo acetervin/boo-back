@@ -5,6 +5,7 @@ import { useTheme } from "@/hooks/use-theme";
 import Masonry from "react-masonry-css";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
+import { useState, useEffect } from "react";
 
 const iconMap: Record<string, any> = {
   binoculars: Binoculars,
@@ -36,24 +37,25 @@ export default function Gallery() {
     refetchOnWindowFocus: false,
   });
 
-  // Collect all images from properties
-  let allImages: { url: string; title: string }[] = [];
-  if (properties && Array.isArray(properties)) {
-    properties.forEach((prop: any) => {
-      if (prop.image_url) allImages.push({ url: prop.image_url, title: prop.name });
-      if (Array.isArray(prop.images)) {
-        prop.images.forEach((img: string, idx: number) => {
-          allImages.push({ url: img, title: `${prop.name} #${idx + 1}` });
-        });
-      }
-    });
-  }
-  // Shuffle and pick 30 random images
-  function getRandomImages(arr: { url: string; title: string }[], n: number) {
-    const shuffled = arr.slice().sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, n);
-  }
-  const masonryImages = getRandomImages(allImages, 30);
+  // Store selected images in state so they don't change on theme toggle
+  const [masonryImages, setMasonryImages] = useState<{ url: string; title: string }[]>([]);
+
+  useEffect(() => {
+    if (properties && Array.isArray(properties) && masonryImages.length === 0) {
+      let allImages: { url: string; title: string }[] = [];
+      properties.forEach((prop: any) => {
+        if (prop.image_url) allImages.push({ url: prop.image_url, title: prop.name });
+        if (Array.isArray(prop.images)) {
+          prop.images.forEach((img: string, idx: number) => {
+            allImages.push({ url: img, title: `${prop.name} #${idx + 1}` });
+          });
+        }
+      });
+      // Shuffle and pick 30 random images
+      const shuffled = allImages.slice().sort(() => 0.5 - Math.random());
+      setMasonryImages(shuffled.slice(0, 30));
+    }
+  }, [properties]);
 
   return (
     <div
@@ -69,7 +71,7 @@ export default function Gallery() {
             className="flex gap-6"
             columnClassName="masonry-column"
           >
-            {masonryImages.map((img, i) => (
+            {masonryImages.map((img: { url: string; title: string }, i: number) => (
               <div
                 key={i}
                 className="mb-6 rounded-xl overflow-hidden bg-card shadow-lg group transform transition duration-700 hover:scale-105 hover:shadow-2xl"

@@ -31,25 +31,7 @@ export default function LoadingScreen() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Animated Logo */}
-          <div className="relative">
-            <motion.div
-              className={`w-36 h-36 border-[3px] ${
-                theme === 'dark' ? 'border-amber-700/30' : 'border-amber-300/30'
-              } rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            />
-            <motion.div
-              className={`w-36 h-36 border-[3px] ${
-                theme === 'dark' ? 'border-amber-500' : 'border-amber-500'
-              } rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, ease: "linear", repeat: Infinity }}
-            />
-          </div>
+          {/* ...removed animated circles... */}
 
           {/* Text Animation */}
           <motion.div

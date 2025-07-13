@@ -1,1 +1,0 @@
-ALTER TABLE "properties" ADD COLUMN "categorized_images" text[] DEFAULT '[]' NOT NULL;
