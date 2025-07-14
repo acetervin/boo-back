@@ -1,12 +1,38 @@
+// Sample categorized images for demo properties
+const propertyImages = [
+  { property_name: "Westlands Executive Apartment", category: "Bedroom", image_url: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=400&q=80" },
+  { property_name: "Westlands Executive Apartment", category: "Bedroom", image_url: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" },
+  { property_name: "Westlands Executive Apartment", category: "Living Room", image_url: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" },
+  { property_name: "Karen Heights Apartment", category: "Bedroom", image_url: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=400&q=80" },
+  { property_name: "Karen Heights Apartment", category: "Garden", image_url: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" }
+];
 import * as dotenv from "dotenv";
 dotenv.config();
 
 import pkg from "pg";
-const { Client } = pkg;
+const { Pool } = pkg;
 
-const client = new Client({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+  idleTimeoutMillis: 30000 // 30 seconds
+});
 
-const properties = [
+const properties: Array<{
+  id?: number;
+  name: string;
+  description: string;
+  location: string;
+  price_per_night: number;
+  max_guests: number;
+  bedrooms: number;
+  image_url: string;
+  images: string[];
+  amenities: string[];
+  featured: boolean;
+  category: string;
+  categorized_images?: any[];
+}> = [
   {
     name: "Westlands Executive Apartment",
     description: "Modern luxury apartment in Westlands with premium finishes, rooftop terrace, and stunning city views. Perfect for business travelers and urban stays.",
@@ -24,7 +50,7 @@ const properties = [
     amenities: ["Wi-Fi", "Gym Access", "Parking", "City View", "Kitchen", "24/7 Security"],
     featured: true,
     category: "apartments",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Karen Heights Apartment",
@@ -43,7 +69,7 @@ const properties = [
     amenities: ["Wi-Fi", "Garden View", "Balcony", "Kitchen", "Security", "Parking"],
     featured: true,
     category: "apartments",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Ocean Paradise Villa",
@@ -62,7 +88,7 @@ const properties = [
     amenities: ["Private Beach", "Infinity Pool", "Ocean View", "Wi-Fi", "AC", "Private Chef"],
     featured: true,
     category: "villas",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Kilifi Creek Villa",
@@ -80,7 +106,7 @@ const properties = [
     amenities: ["Creek View", "Traditional Design", "Pool", "Wi-Fi", "Spacious Terrace", "Dhow Trips"],
     featured: false,
     category: "villas",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Lavington Family House",
@@ -98,7 +124,7 @@ const properties = [
     amenities: ["Large Garden", "Family Room", "Wi-Fi", "Kitchen", "Parking", "Security"],
     featured: true,
     category: "houses",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Runda Contemporary House",
@@ -116,7 +142,7 @@ const properties = [
     amenities: ["Modern Design", "Garden", "Wi-Fi", "Study Room", "Parking", "Gated Community"],
     featured: false,
     category: "houses",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Karen Gardens Apartment",
@@ -135,7 +161,7 @@ const properties = [
     amenities: ["Wi-Fi", "Garden View", "Parking", "AC", "Kitchen", "Shopping Nearby"],
     featured: true,
     category: "apartments",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Kilifi Creek Apartment",
@@ -153,7 +179,7 @@ const properties = [
     amenities: ["Wi-Fi", "Ocean View", "Beach Access", "AC", "Kitchen", "Balcony"],
     featured: false,
     category: "villas",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Naivasha Lakeside Retreat",
@@ -172,7 +198,7 @@ const properties = [
     amenities: ["Wi-Fi", "Fishing", "Game Drives", "Boat Dock", "Kitchen", "Fireplace"],
     featured: false,
     category: "houses",
-    categorized_images: []
+    // removed categorized_images
   },
   {
     name: "Mount Kenya View Lodge",
@@ -191,7 +217,7 @@ const properties = [
     amenities: ["Wi-Fi", "Fireplace", "Safari", "Mountain View", "Kitchen", "Hiking"],
     featured: false,
     category: "houses",
-    categorized_images: []
+    // categorized_images removed; images are now seeded via property_images table
   },
   {
     name: "Runda Modern Apartment",
@@ -229,25 +255,23 @@ const properties = [
     amenities: ["Wi-Fi", "Game Drives", "All Meals", "Game View", "Kitchen", "Safari Guides"],
     featured: true,
     category: "houses",
-    categorized_images: ["https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1490735891913-40897cdaafd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-
-    ]
+    // categorized_images removed; images are now seeded via property_images table
   }
 ];
 
 async function seed() {
-  await client.connect();
-
   // Optional: Clear the table first
-  await client.query('DELETE FROM properties');
+  await pool.query('DELETE FROM property_images');
+  await pool.query('DELETE FROM properties');
 
-  for (const property of properties) {
-    await client.query(      `INSERT INTO properties
+  // Insert properties and build a map of name -> id
+  const propertyIdMap = new Map();
+  for (let i = 0; i < properties.length; i++) {
+    const property = properties[i];
+    const res = await pool.query(
+      `INSERT INTO properties
         (name, description, location, price_per_night, max_guests, bedrooms, image_url, images, amenities, featured, category)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING id`,
       [
         property.name,
         property.description,
@@ -262,13 +286,26 @@ async function seed() {
         property.category
       ]
     );
+    property.id = res.rows[0].id;
+    propertyIdMap.set(property.name, property.id);
   }
 
-  await client.end();
+  // Seed categorized images using mapped IDs
+  for (const img of propertyImages) {
+    const property_id = propertyIdMap.get(img.property_name);
+    if (property_id) {
+      await pool.query(
+        `INSERT INTO property_images (property_id, category, image_url) VALUES ($1, $2, $3)`,
+        [property_id, img.category, img.image_url]
+      );
+    }
+  }
+
+  await pool.end();
   console.log("Database seeded!");
 }
 
 seed().catch(e => {
   console.error(e);
-  client.end();
+  pool.end();
 });

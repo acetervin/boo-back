@@ -26,7 +26,7 @@ export default function Navigation() {
           <div className="flex items-center">
             <Link href="/">
               <h1 className="font-space-grotesk text-2xl font-bold text-foreground cursor-pointer hover:text-primary transition-colors">
-                Kenya Stays
+                Kairos Apartments
               </h1>
             </Link>
           </div>

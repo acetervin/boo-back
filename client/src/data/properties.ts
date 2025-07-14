@@ -11,31 +11,62 @@ export const propertyCategories = [
   { id: 'kilifi', name: 'Kilifi Coast', icon: Waves },
 ];
 
-// Experience section data for the gallery page
-export interface Experience {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  feature: string;
-  icon: string;
-}
 
-export const experiences: Experience[] = [
+// Sample property data with categorized_images for gallery demo
+export const properties = [
   {
     id: 1,
-    title: "Maasai Mara Safari",
-    description: "Experience the Great Migration and witness the Big Five in their natural habitat.",
-    imageUrl: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-    feature: "Wildlife Photography Tours",
-    icon: "binoculars"
+    name: "Westlands Executive Apartment",
+    description: "Modern luxury apartment in Westlands with premium finishes, rooftop terrace, and stunning city views. Perfect for business travelers and urban stays.",
+    location: "Westlands, Nairobi",
+    price_per_night: 8500.00,
+    max_guests: 4,
+    bedrooms: 2,
+    image_url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+    amenities: ["Wi-Fi", "Gym Access", "Parking", "City View", "Kitchen", "24/7 Security"],
+    featured: true,
+    category: "apartments",
+    categorized_images: [
+      {
+        category: "Bedroom",
+        images: [
+          "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=400&q=80",
+          "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+        ]
+      },
+      {
+        category: "Living Room",
+        images: [
+          "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+        ]
+      }
+    ]
   },
   {
     id: 2,
-    title: "Coastal Adventures",
-    description: "Enjoy pristine beaches, dhow sailing, and world-class diving in the Indian Ocean.",
-    imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-    feature: "Private Dhow Cruises",
-    icon: "ship"
+    name: "Ocean Paradise Villa",
+    description: "Stunning beachfront villa with infinity pool overlooking the Indian Ocean at Diani Beach. Perfect for families and groups seeking luxury by the sea.",
+    location: "Diani Beach, Kwale",
+    price_per_night: 25000.00,
+    max_guests: 8,
+    bedrooms: 4,
+    image_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+    amenities: ["Private Beach", "Infinity Pool", "Ocean View", "Wi-Fi", "AC", "Private Chef"],
+    featured: true,
+    category: "villas",
+    categorized_images: [
+      {
+        category: "Pool",
+        images: [
+          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+        ]
+      },
+      {
+        category: "Beach",
+        images: [
+          "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+        ]
+      }
+    ]
   }
 ];
