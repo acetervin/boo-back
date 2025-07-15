@@ -11,11 +11,15 @@ export const properties = pgTable("properties", {
   max_guests: integer("max_guests").notNull(),
   bedrooms: integer("bedrooms").notNull(),
   image_url: text("image_url").notNull(),
+  main_image_url: text("main_image_url"),
+  gallery_image_url: text("gallery_image_url"),
   images: text("images").array(),
   categorized_images: jsonb("categorized_images").notNull().default([]),
   amenities: text("amenities").array().notNull(),
   featured: boolean("featured").default(false),
   category: text("category").notNull(), // 'diani', 'naivasha', 'nanyuki', 'nairobi', etc.
+  is_active: boolean("is_active").notNull().default(true),
+  removed_at: timestamp("removed_at"),
 });
 
 export const bookings = pgTable("bookings", {
@@ -31,6 +35,8 @@ export const bookings = pgTable("bookings", {
   paymentStatus: text("payment_status").default("pending"), // 'pending', 'completed', 'failed'
   status: text("status").default("pending"), // 'pending', 'confirmed', 'cancelled'
   createdAt: timestamp("created_at").defaultNow(),
+  is_active: boolean("is_active").notNull().default(true),
+  removed_at: timestamp("removed_at"),
 });
 
 export const contactMessages = pgTable("contact_messages", {
@@ -42,6 +48,8 @@ export const contactMessages = pgTable("contact_messages", {
   propertyInterest: text("property_interest"),
   message: text("message").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
+  is_active: boolean("is_active").notNull().default(true),
+  removed_at: timestamp("removed_at"),
 });
 
 export const insertPropertySchema = createInsertSchema(properties).omit({

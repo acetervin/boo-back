@@ -55,22 +55,19 @@ const CategoryGallery: React.FC<CategoryGalleryProps> = ({ categories }) => {
   return (
     <div>
       <div className="flex flex-wrap gap-2 mb-6 justify-center">
-      {categories.map(cat => (
-        <button
-        key={cat.category}
-        className={`px-4 py-2 rounded font-medium transition-colors text-sm
-          ${selectedCategory === cat.category
-          ? "bg-orange-600 text-white"
-          : "bg-gray-100 text-black dark:bg-gray-900 dark:text-white"}
-          ${selectedCategory !== cat.category
-          ? "hover:bg-gray-200 dark:hover:bg-white dark:hover:text-black"
-          : ""}
-        `}
-        onClick={() => setSelectedCategory(cat.category)}
-        >
-        {cat.category}
-        </button>
-      ))}
+        {categories.map(cat => (
+          <button
+            key={cat.category}
+            className={`px-4 py-2 rounded-md border transition-colors text-sm font-medium
+              ${selectedCategory === cat.category
+                ? "bg-orange-600 text-white border-orange-600 shadow"
+                : "bg-transparent border border-border text-foreground dark:text-white hover:bg-muted dark:hover:bg-muted"}
+            `}
+            onClick={() => setSelectedCategory(cat.category)}
+          >
+            {cat.category}
+          </button>
+        ))}
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {currentCategory?.images.map((img, idx) => (

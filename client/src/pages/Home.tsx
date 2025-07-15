@@ -149,9 +149,15 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {apartments?.slice(0, 3).map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
+            {apartments && apartments.length > 0 ? (
+              apartments.slice(0, 3).map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center text-muted-foreground py-8">
+                No apartments available at the moment.
+              </div>
+            )}
           </div>
         </section>
 
@@ -170,9 +176,15 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {villas?.slice(0, 3).map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
+            {villas && villas.length > 0 ? (
+              villas.slice(0, 3).map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center text-muted-foreground py-8">
+                No villas available at the moment.
+              </div>
+            )}
           </div>
         </section>
 
@@ -191,9 +203,15 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {houses?.slice(0, 3).map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
+            {houses && houses.length > 0 ? (
+              houses.slice(0, 3).map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center text-muted-foreground py-8">
+                No houses available at the moment.
+              </div>
+            )}
           </div>
         </section>
       </div>

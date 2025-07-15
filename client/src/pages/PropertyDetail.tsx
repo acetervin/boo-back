@@ -116,8 +116,8 @@ export default function PropertyDetail() {
     <div className="bg-background min-h-screen pb-12">
       <div className="relative h-[60vh] md:h-[70vh]">
         <img
-          src="https://media.joomeo.com/large/687556b842e5c.jpg"
-          alt="Property main image"
+          src={property.main_image_url || property.image_url}
+          alt={property.name}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
@@ -132,8 +132,13 @@ export default function PropertyDetail() {
           
               <div className="relative h-[50vh]">
                 <img
-                  src="https://media.joomeo.com/large/687560cfd3b93.jpg"
-                  alt={`${property.name} - View ${currentImage + 1}`}
+                  src={
+                    property.gallery_image_url
+                      || (Array.isArray(property.categorized_images) && property.categorized_images.length > 0 && property.categorized_images[0].images.length > 0
+                        ? property.categorized_images[0].images[0]
+                        : property.image_url)
+                  }
+                  alt={`${property.name} - Gallery View`}
                   className="w-full h-full object-cover"
                 />
               </div>

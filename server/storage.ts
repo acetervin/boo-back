@@ -18,7 +18,7 @@ export class PgStorage {
 
   // Properties
   async getProperties(): Promise<Property[]> {
-    const res = await this.pool.query("SELECT * FROM properties");
+    const res = await this.pool.query("SELECT * FROM properties WHERE is_active = true");
     return res.rows;
   }
 
@@ -49,12 +49,12 @@ export class PgStorage {
   }
 
   async getPropertiesByCategory(category: string): Promise<Property[]> {
-    const res = await this.pool.query("SELECT * FROM properties WHERE category = $1", [category]);
+    const res = await this.pool.query("SELECT * FROM properties WHERE category = $1 AND is_active = true", [category]);
     return res.rows;
   }
 
   async getFeaturedProperties(): Promise<Property[]> {
-    const res = await this.pool.query("SELECT * FROM properties WHERE featured = true");
+    const res = await this.pool.query("SELECT * FROM properties WHERE featured = true AND is_active = true");
     return res.rows;
   }
 

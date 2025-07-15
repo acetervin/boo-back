@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { experiences } from "@/data/properties";
 import { Binoculars, Ship, Mountain, Users, Egg, Plane } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import Masonry from "react-masonry-css";
