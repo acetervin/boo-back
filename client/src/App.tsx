@@ -12,7 +12,9 @@ import PropertyDetail from "@/pages/PropertyDetail";
 import About from "@/pages/About";
 import Gallery from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
+import BookingPage from "@/pages/BookingPage";
 import Navigation from "@/components/Navigation";
+
 import BackButton from "@/components/BackButton";
 import StickyContactButtons from "@/components/StickyContactButtons";
 import Footer from "@/components/Footer";
@@ -27,7 +29,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/properties" component={Properties} />
       <Route path="/properties/:id" component={PropertyDetail} />
+      <Route path="/booking/:id" component={BookingPage} />
       <Route path="/about" component={About} />
+
       <Route path="/gallery" component={Gallery} />
       <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={PrivacyPolicy} />
