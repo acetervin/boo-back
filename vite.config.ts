@@ -10,10 +10,7 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 5000,
-    allowedHosts: [
-      "localhost",
-      "9969121d-e816-451d-8073-71cb42a4442c-00-3tyck62k9lzk0.kirk.replit.dev",
-    ],
+    allowedHosts: "all",
   },
   resolve: {
     alias: {
