@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 
 
   const port = 5000;
-  const host = process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1";
+  const host = "0.0.0.0";
   server.listen(port, host, () => {
     log(`serving on port ${port}`);
   });
