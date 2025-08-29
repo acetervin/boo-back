@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Users, Bed, MessageCircle } from "lucide-react";
 import type { Property } from "@shared/schema";
 import { useTheme } from "@/hooks/use-theme";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface PropertyCardProps {
   property: Property;
@@ -12,6 +13,10 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ property }: PropertyCardProps) {
   const { theme } = useTheme();
+  const { formatPrice, convertPrice, currency } = useCurrency();
+  
+  // Assume prices are stored in KES in the database
+  const displayPrice = convertPrice(Number(property.price_per_night), 'KES', currency);
   
   const handleWhatsAppClick = () => {
     const message = `Hi, I'm interested in ${property.name}`;
@@ -49,7 +54,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         
         <div className="flex items-baseline justify-between mb-4">
           <span className="text-2xl font-bold text-foreground">
-            KES {Number(property.price_per_night).toLocaleString()}
+            {formatPrice(displayPrice)}
           </span>
           <span className="text-muted-foreground text-sm">per night</span>
         </div>

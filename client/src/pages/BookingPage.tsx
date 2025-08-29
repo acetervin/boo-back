@@ -99,7 +99,25 @@ export default function BookingPage() {
   const totalNights = date?.from && date?.to ? differenceInCalendarDays(date.to, date.from) : 0;
 
   const handleBooking = () => {
-    console.log("Booking...", { propertyId, date, guests: adults + children, totalNights });
+    if (!date?.from || !date?.to) {
+      return;
+    }
+
+    const bookingDetails = {
+      propertyId,
+      checkIn: date.from.toISOString(),
+      checkOut: date.to.toISOString(),
+      guests: adults + children,
+      adults,
+      children,
+      totalNights,
+    };
+
+    // Store booking details in localStorage for the checkout page
+    localStorage.setItem('booking-details', JSON.stringify(bookingDetails));
+    
+    // Redirect to checkout page
+    window.location.href = `/checkout/${propertyId}`;
   };
 
   if (isLoading) {
@@ -226,7 +244,14 @@ export default function BookingPage() {
               )}
             </div>
             <div className="lg:col-span-1 sticky top-24">
-              <BookingSummary checkInDate={date?.from || new Date()} checkOutDate={date?.to || new Date()} guestCount={adults + children} totalNights={totalNights} onBook={handleBooking} />
+              <BookingSummary 
+                checkInDate={date?.from || new Date()} 
+                checkOutDate={date?.to || new Date()} 
+                guestCount={adults + children} 
+                totalNights={totalNights} 
+                pricePerNight={Number(property.price_per_night)}
+                onBook={handleBooking} 
+              />
             </div>
           </div>
         </div>

@@ -31,12 +31,48 @@ export const bookings = pgTable("bookings", {
   checkIn: timestamp("check_in").notNull(),
   checkOut: timestamp("check_out").notNull(),
   totalAmount: decimal("total_amount", { precision: 10, scale: 2 }).notNull(),
+  currency: text("currency").notNull().default("KES"), // 'KES', 'USD'
   paymentMethod: text("payment_method").notNull(), // 'mpesa', 'paypal', 'cash'
   paymentStatus: text("payment_status").default("pending"), // 'pending', 'completed', 'failed'
+  paymentIntentId: text("payment_intent_id"), // PayPal order ID or M-Pesa transaction ID
   status: text("status").default("pending"), // 'pending', 'confirmed', 'cancelled'
+  source: text("source").default("direct"), // 'direct', 'booking.com', 'airbnb'
+  externalBookingId: text("external_booking_id"), // ID from external platforms
+  notes: text("notes"), // Internal notes
+  guestCount: integer("guest_count").notNull(),
+  adults: integer("adults").notNull(),
+  children: integer("children").default(0),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
   is_active: boolean("is_active").notNull().default(true),
   removed_at: timestamp("removed_at"),
+});
+
+// Calendar sync table for external booking platforms
+export const calendarSync = pgTable("calendar_sync", {
+  id: serial("id").primaryKey(),
+  propertyId: integer("property_id").references(() => properties.id).notNull(),
+  platform: text("platform").notNull(), // 'booking.com', 'airbnb', 'manual'
+  externalCalendarUrl: text("external_calendar_url"), // iCal URL for sync
+  lastSyncAt: timestamp("last_sync_at"),
+  syncStatus: text("sync_status").default("pending"), // 'pending', 'success', 'failed'
+  syncErrors: text("sync_errors"), // Error messages if sync fails
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Blocked dates for properties (from external calendars or manual entry)
+export const blockedDates = pgTable("blocked_dates", {
+  id: serial("id").primaryKey(),
+  propertyId: integer("property_id").references(() => properties.id).notNull(),
+  startDate: timestamp("start_date").notNull(),
+  endDate: timestamp("end_date").notNull(),
+  reason: text("reason").notNull(), // 'booking', 'maintenance', 'personal_use', 'external_booking'
+  source: text("source").default("manual"), // 'manual', 'booking.com', 'airbnb', 'direct_booking'
+  externalId: text("external_id"), // External booking ID if from sync
+  createdAt: timestamp("created_at").defaultNow(),
+  isActive: boolean("is_active").notNull().default(true),
 });
 
 export const contactMessages = pgTable("contact_messages", {
@@ -66,9 +102,24 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).om
   createdAt: true,
 });
 
+export const insertCalendarSyncSchema = createInsertSchema(calendarSync).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertBlockedDateSchema = createInsertSchema(blockedDates).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type Property = typeof properties.$inferSelect;
 export type InsertProperty = z.infer<typeof insertPropertySchema>;
 export type Booking = typeof bookings.$inferSelect;
 export type InsertBooking = z.infer<typeof insertBookingSchema>;
+export type CalendarSync = typeof calendarSync.$inferSelect;
+export type InsertCalendarSync = z.infer<typeof insertCalendarSyncSchema>;
+export type BlockedDate = typeof blockedDates.$inferSelect;
+export type InsertBlockedDate = z.infer<typeof insertBlockedDateSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;

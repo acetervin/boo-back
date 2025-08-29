@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useLocation } from "wouter";
 import { MessageCircle, Users, Bed } from 'lucide-react';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 interface BookingFormProps {
   pricePerNight: number;
@@ -17,17 +18,21 @@ export function BookingForm({
   bedrooms,
 }: BookingFormProps) {
   const [, setLocation] = useLocation();
+  const { formatPrice, convertPrice } = useCurrency();
 
   // TODO: Replace with actual WhatsApp number and property details in the message
   const whatsappUrl = `https://wa.me/254123456789?text=${encodeURIComponent(
     "I'm interested in booking a stay at your property."
   )}`;
 
+  // Assume prices are stored in KES in the database
+  const displayPrice = convertPrice(pricePerNight, 'KES', useCurrency().currency);
+
   return (
     <Card className="sticky top-8">
       <CardHeader>
         <CardTitle>
-          <span className="text-2xl font-bold">${pricePerNight}</span>
+          <span className="text-2xl font-bold">{formatPrice(displayPrice)}</span>
           <span className="text-base font-normal text-muted-foreground"> / night</span>
         </CardTitle>
       </CardHeader>

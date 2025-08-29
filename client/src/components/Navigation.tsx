@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ArrowLeft, Home } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { CurrencyToggle } from "./CurrencySwitcher";
 import { useTheme } from "@/hooks/use-theme";
 
 const navItems = [
@@ -49,11 +50,15 @@ export default function Navigation() {
                 </Button>
               </Link>
             ))}
-            <ThemeToggle />
+            <div className="flex items-center space-x-2">
+              <CurrencyToggle />
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Mobile Navigation */}
           <div className="flex md:hidden items-center space-x-2">
+            <CurrencyToggle />
             <ThemeToggle />
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>

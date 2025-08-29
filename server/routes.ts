@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema, insertBookingSchema } from "@shared/schema";
-// import { createPaypalOrder, capturePaypalOrder, loadPaypalDefault } from "./paypal";
+// import { createPaypalOrder, capturePaypalOrder } from "./paypal";
 //import { loadMpesaSetup, createMpesaOrder, captureMpesaOrder } from "./mpesa";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -96,19 +96,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
- {/*  Mpesa routes
-  app.get("/api/mpesa/setup", async (req, res) => {
-    await loadMpesaSetup(req, res);
+  // PayPal routes (placeholder for now)
+  app.post("/api/paypal/order", async (req, res) => {
+    res.json({ success: false, error: "PayPal integration coming soon" });
   });
 
+  app.post("/api/paypal/order/:orderID/capture", async (req, res) => {
+    res.json({ success: false, error: "PayPal integration coming soon" });
+  });
+
+  // M-Pesa routes (placeholder for now)
   app.post("/api/mpesa/order", async (req, res) => {
-    await createMpesaOrder(req, res);
+    res.json({ success: false, error: "M-Pesa integration coming soon" });
   });
 
-  app.post("/api/mpesa/order/:orderID/capture", async (req, res) => {
-    await captureMpesaOrder(req, res);
+  app.get("/api/mpesa/status/:transactionId", async (req, res) => {
+    res.json({ status: "pending" });
   });
-*/}
 
   // WhatsApp booking helper
   app.post("/api/whatsapp-booking", async (req, res) => {
