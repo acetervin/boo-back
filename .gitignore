@@ -1,3 +1,5 @@
+# Replit agent filesystem (safe to ignore if not needed)
+.local/state/replit/agent/filesystem/
 # dependencies
 node_modules/
 .pnp/
@@ -38,6 +40,10 @@ seed-db.js
 
 # database
 *.sqlite
+# Replit-specific files and folders
+.replit
+replit.md
+.local/
 *.sqlite3
 
 # Generated files
