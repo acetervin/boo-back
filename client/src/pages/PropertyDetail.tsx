@@ -44,26 +44,26 @@ export default function PropertyDetail() {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [selectedVideoUrl, setSelectedVideoUrl] = useState("");
 
+  const { data: property, isLoading, error } = useQuery<Property>({
+    queryKey: [`/api/properties/${propertyId}`],
+    enabled: !!propertyId,
+  });
+
   // Sample video URLs - in real implementation these could come from property data or be configurable
-  const propertyVideos = [
+  const propertyVideos = property ? [
     {
       id: 1,
       title: "Property Tour",
-      thumbnail: property?.main_image_url || "/placeholder.jpg",
+      thumbnail: property.main_image_url || property.image_url || "/placeholder.jpg",
       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with actual video URLs
     },
     {
       id: 2,
       title: "Neighborhood Overview",
-      thumbnail: property?.image_url || "/placeholder.jpg",
+      thumbnail: property.image_url || "/placeholder.jpg",
       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with actual video URLs
     }
-  ];
-
-  const { data: property, isLoading, error } = useQuery<Property>({
-    queryKey: [`/api/properties/${propertyId}`],
-    enabled: !!propertyId,
-  });
+  ] : [];
 
   if (isLoading) {
     return (
@@ -85,15 +85,18 @@ export default function PropertyDetail() {
     );
   }
 
-  // Get all images for the enhanced gallery
-  const allImages = Array.isArray(property.categorized_images)
-    ? property.categorized_images.flatMap((cat: any) => cat.images || [])
-    : [];
-  
-  // Add main image if not in categorized images
-  if (property.main_image_url && !allImages.includes(property.main_image_url)) {
-    allImages.unshift(property.main_image_url);
-  }
+  // Get all images for the enhanced gallery (only if property exists)
+  const allImages = property ? (() => {
+    const images = Array.isArray(property.categorized_images)
+      ? property.categorized_images.flatMap((cat: any) => cat.images || [])
+      : [];
+    
+    // Add main image if not in categorized images
+    if (property.main_image_url && !images.includes(property.main_image_url)) {
+      images.unshift(property.main_image_url);
+    }
+    return images;
+  })() : [];
 
   const openVideoModal = (videoUrl: string) => {
     setSelectedVideoUrl(videoUrl);
