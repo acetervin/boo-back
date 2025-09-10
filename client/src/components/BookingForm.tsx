@@ -49,28 +49,7 @@ export function BookingForm({
             </div>
           </div>
           <Button onClick={() => setLocation(`/booking/${propertyId}`)} size="lg" className="w-full bg-primary hover:bg-primary/90">
-            Book Now
-          </Button>
-          
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">or contact us to</span>
-            </div>
-          </div>
-
-          <Button asChild size="lg" className="w-full" variant="outline">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center"
-            >
-              <MessageCircle className="mr-2 h-4 w-4" />
-              Book via WhatsApp
-            </a>
+            Proceed to Booking
           </Button>
 
           <div className="flex flex-col space-y-2 mt-4">
