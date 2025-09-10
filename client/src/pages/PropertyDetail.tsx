@@ -118,43 +118,7 @@ export default function PropertyDetail() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         
-        {/* Enhanced Image Navigation */}
-        {allImages.length > 1 && (
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <div className="bg-black/30 backdrop-blur-md rounded-full px-4 py-2">
-              <div className="flex space-x-3 items-center">
-                {allImages.slice(0, 6).map((_, index) => (
-                  <motion.button
-                    key={index}
-                    onClick={() => setActiveImageIndex(index)}
-                    className={`rounded-full transition-all ${
-                      index === activeImageIndex 
-                        ? 'w-4 h-4 bg-white' 
-                        : 'w-3 h-3 bg-white/60 hover:bg-white/80'
-                    }`}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                  />
-                ))}
-                {allImages.length > 6 && (
-                  <span className="text-white text-sm font-medium ml-2">
-                    +{allImages.length - 6}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
         
-        {/* Action Buttons */}
-        <div className="absolute top-4 right-4 flex space-x-2">
-          <Button size="sm" variant="secondary" className="bg-white/20 backdrop-blur-md hover:bg-white/30">
-            <Heart className="h-4 w-4" />
-          </Button>
-          <Button size="sm" variant="secondary" className="bg-white/20 backdrop-blur-md hover:bg-white/30">
-            <Share2 className="h-4 w-4" />
-          </Button>
-        </div>
         
         {/* Property Header Overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -249,50 +213,14 @@ export default function PropertyDetail() {
                     </TabsList>
                     
                     <TabsContent value="gallery" className="mt-6">
-                      {/* Enhanced Gallery with Modal */}
-                      <div className="space-y-6">
-                        {/* Mini Gallery Grid */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                          {allImages.slice(0, 8).map((image, index) => (
-                            <motion.div
-                              key={index}
-                              className="relative group cursor-pointer rounded-lg overflow-hidden aspect-square"
-                              whileHover={{ scale: 1.05 }}
-                              onClick={() => {
-                                setActiveImageIndex(index);
-                                setShowVideoModal(true); // Reuse modal for images
-                                setSelectedVideoUrl(''); // Clear video URL to show image
-                              }}
-                            >
-                              <img 
-                                src={image} 
-                                alt={`${property.name} view ${index + 1}`}
-                                className="w-full h-full object-cover transition-transform group-hover:scale-110"
-                              />
-                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-                              {index === 7 && allImages.length > 8 && (
-                                <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                                  <span className="text-white font-bold text-xl">
-                                    +{allImages.length - 7}
-                                  </span>
-                                </div>
-                              )}
-                            </motion.div>
-                          ))}
-                        </div>
-                        
-                        {/* Original CategoryGallery for organized viewing */}
-                        <div className="border-t pt-6">
-                          <h3 className="text-lg font-semibold mb-4">View by Category</h3>
-                          <CategoryGallery
-                            categories={
-                              Array.isArray(property.categorized_images)
-                                ? property.categorized_images
-                                : []
-                            }
-                          />
-                        </div>
-                      </div>
+                      {/* Enhanced CategoryGallery */}
+                      <CategoryGallery
+                        categories={
+                          Array.isArray(property.categorized_images)
+                            ? property.categorized_images
+                            : []
+                        }
+                      />
                     </TabsContent>
                     
                     <TabsContent value="videos" className="mt-6">
