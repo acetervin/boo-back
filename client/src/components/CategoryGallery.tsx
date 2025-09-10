@@ -54,22 +54,45 @@ const CategoryGallery: React.FC<CategoryGalleryProps> = ({ categories }) => {
   return (
     <div className="space-y-6">
       {/* Enhanced Category Selection */}
-      <div className="flex flex-wrap gap-3 justify-center">
-        {categories.map(cat => (
-          <motion.button
-            key={cat.category}
-            className={`px-6 py-3 rounded-full font-medium transition-all duration-200 ${
-              selectedCategory === cat.category
-                ? "bg-primary text-primary-foreground shadow-lg scale-105"
-                : "bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground border hover:shadow-md"
-            }`}
-            onClick={() => setSelectedCategory(cat.category)}
-            whileHover={{ scale: selectedCategory === cat.category ? 1.05 : 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {cat.category} ({cat.images.length})
-          </motion.button>
-        ))}
+      <div className="space-y-4">
+        {/* Mobile: Horizontal Scrollable */}
+        <div className="md:hidden">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+            {categories.map(cat => (
+              <motion.button
+                key={cat.category}
+                className={`flex-shrink-0 px-4 py-2 rounded-full font-medium transition-all duration-200 whitespace-nowrap ${
+                  selectedCategory === cat.category
+                    ? "bg-primary text-primary-foreground shadow-lg"
+                    : "bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground border"
+                }`}
+                onClick={() => setSelectedCategory(cat.category)}
+                whileTap={{ scale: 0.95 }}
+              >
+                {cat.category} ({cat.images.length})
+              </motion.button>
+            ))}
+          </div>
+        </div>
+        
+        {/* Desktop: Centered Layout */}
+        <div className="hidden md:flex flex-wrap gap-3 justify-center">
+          {categories.map(cat => (
+            <motion.button
+              key={cat.category}
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-200 ${
+                selectedCategory === cat.category
+                  ? "bg-primary text-primary-foreground shadow-lg scale-105"
+                  : "bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground border hover:shadow-md"
+              }`}
+              onClick={() => setSelectedCategory(cat.category)}
+              whileHover={{ scale: selectedCategory === cat.category ? 1.05 : 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {cat.category} ({cat.images.length})
+            </motion.button>
+          ))}
+        </div>
       </div>
 
       {/* Enhanced Image Grid */}

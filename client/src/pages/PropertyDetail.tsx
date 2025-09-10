@@ -347,11 +347,32 @@ export default function PropertyDetail() {
             </motion.div>
 
 
-            {/* Enhanced Amenities */}
+            {/* Booking Form Section - Moved here */}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl">Book Your Stay</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <BookingForm
+                    pricePerNight={Number(property.price_per_night)}
+                    propertyId={property.id}
+                    maxGuests={property.max_guests}
+                    bedrooms={property.bedrooms}
+                  />
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Enhanced Amenities */}
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
             >
               <Card>
                 <CardHeader>
@@ -389,7 +410,7 @@ export default function PropertyDetail() {
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.5 }}
             >
               <Card>
                 <CardHeader>
@@ -415,7 +436,7 @@ export default function PropertyDetail() {
             </motion.div>
           </div>
 
-          {/* Enhanced Booking Form */}
+          {/* Quick Property Info Sidebar */}
           <div className="lg:col-span-2">
             <motion.div
               initial={{ y: 30, opacity: 0 }}
@@ -423,12 +444,34 @@ export default function PropertyDetail() {
               transition={{ delay: 0.5 }}
               className="sticky top-8"
             >
-              <BookingForm
-                pricePerNight={Number(property.price_per_night)}
-                propertyId={property.id}
-                maxGuests={property.max_guests}
-                bedrooms={property.bedrooms}
-              />
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl">Property Highlights</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-3 bg-muted/50 rounded-lg">
+                      <Users className="h-5 w-5 mx-auto mb-2 text-primary" />
+                      <div className="font-semibold">{property.max_guests}</div>
+                      <div className="text-sm text-muted-foreground">Guests</div>
+                    </div>
+                    <div className="text-center p-3 bg-muted/50 rounded-lg">
+                      <Bed className="h-5 w-5 mx-auto mb-2 text-primary" />
+                      <div className="font-semibold">{property.bedrooms}</div>
+                      <div className="text-sm text-muted-foreground">Bedrooms</div>
+                    </div>
+                  </div>
+                  <div className="text-center pt-4 border-t">
+                    <div className="text-2xl font-bold text-primary">
+                      {new Intl.NumberFormat('en-KE', {
+                        style: 'currency',
+                        currency: 'KES'
+                      }).format(Number(property.price_per_night))}
+                    </div>
+                    <div className="text-sm text-muted-foreground">per night</div>
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </div>
