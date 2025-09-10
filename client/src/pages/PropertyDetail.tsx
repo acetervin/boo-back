@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Users, Bed, Wifi, Car, Coffee, Waves, Play, Star, Heart, Share2, ImageIcon, Video } from "lucide-react";
+import { MapPin, Users, Bed, Wifi, Car, Coffee, Waves, Play, Star, Heart, Share2, ImageIcon, Video, ArrowLeft, ArrowRight, X } from "lucide-react";
 import CategoryGallery from "../components/CategoryGallery";
 import { BookingForm } from "@/components/BookingForm";
 import type { Property } from "@shared/schema";
@@ -112,27 +112,37 @@ export default function PropertyDetail() {
           src={allImages[activeImageIndex] || property.main_image_url || property.image_url}
           alt={property.name}
           className="w-full h-full object-cover"
-          initial={{ scale: 1.1, opacity: 0 }}
+          initial={{ scale: 1.05, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         
-        {/* Image Navigation */}
+        {/* Enhanced Image Navigation */}
         {allImages.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {allImages.slice(0, 5).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveImageIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === activeImageIndex ? 'bg-white scale-125' : 'bg-white/60 hover:bg-white/80'
-                }`}
-              />
-            ))}
-            {allImages.length > 5 && (
-              <span className="text-white text-sm">+{allImages.length - 5}</span>
-            )}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div className="bg-black/30 backdrop-blur-md rounded-full px-4 py-2">
+              <div className="flex space-x-3 items-center">
+                {allImages.slice(0, 6).map((_, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => setActiveImageIndex(index)}
+                    className={`rounded-full transition-all ${
+                      index === activeImageIndex 
+                        ? 'w-4 h-4 bg-white' 
+                        : 'w-3 h-3 bg-white/60 hover:bg-white/80'
+                    }`}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                  />
+                ))}
+                {allImages.length > 6 && (
+                  <span className="text-white text-sm font-medium ml-2">
+                    +{allImages.length - 6}
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         )}
         
@@ -239,14 +249,50 @@ export default function PropertyDetail() {
                     </TabsList>
                     
                     <TabsContent value="gallery" className="mt-6">
-                      {/* Enhanced Gallery */}
-                      <CategoryGallery
-                        categories={
-                          Array.isArray(property.categorized_images)
-                            ? property.categorized_images
-                            : []
-                        }
-                      />
+                      {/* Enhanced Gallery with Modal */}
+                      <div className="space-y-6">
+                        {/* Mini Gallery Grid */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                          {allImages.slice(0, 8).map((image, index) => (
+                            <motion.div
+                              key={index}
+                              className="relative group cursor-pointer rounded-lg overflow-hidden aspect-square"
+                              whileHover={{ scale: 1.05 }}
+                              onClick={() => {
+                                setActiveImageIndex(index);
+                                setShowVideoModal(true); // Reuse modal for images
+                                setSelectedVideoUrl(''); // Clear video URL to show image
+                              }}
+                            >
+                              <img 
+                                src={image} 
+                                alt={`${property.name} view ${index + 1}`}
+                                className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+                              {index === 7 && allImages.length > 8 && (
+                                <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                                  <span className="text-white font-bold text-xl">
+                                    +{allImages.length - 7}
+                                  </span>
+                                </div>
+                              )}
+                            </motion.div>
+                          ))}
+                        </div>
+                        
+                        {/* Original CategoryGallery for organized viewing */}
+                        <div className="border-t pt-6">
+                          <h3 className="text-lg font-semibold mb-4">View by Category</h3>
+                          <CategoryGallery
+                            categories={
+                              Array.isArray(property.categorized_images)
+                                ? property.categorized_images
+                                : []
+                            }
+                          />
+                        </div>
+                      </div>
                     </TabsContent>
                     
                     <TabsContent value="videos" className="mt-6">
@@ -278,39 +324,91 @@ export default function PropertyDetail() {
                         ))}
                       </div>
                       
-                      {/* Video Modal */}
+                      {/* Enhanced Image/Video Modal */}
                       {showVideoModal && (
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
-                          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+                          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
                           onClick={() => setShowVideoModal(false)}
                         >
                           <motion.div
-                            initial={{ scale: 0.8 }}
-                            animate={{ scale: 1 }}
-                            exit={{ scale: 0.8 }}
-                            className="bg-white rounded-lg overflow-hidden max-w-4xl w-full"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative max-w-5xl w-full"
                             onClick={(e) => e.stopPropagation()}
                           >
-                            <div className="aspect-video">
-                              <iframe
-                                src={selectedVideoUrl}
-                                className="w-full h-full"
-                                frameBorder="0"
-                                allowFullScreen
-                                title="Property Video"
-                              />
-                            </div>
-                            <div className="p-4 flex justify-end">
-                              <Button 
-                                variant="outline" 
-                                onClick={() => setShowVideoModal(false)}
-                              >
-                                Close
-                              </Button>
-                            </div>
+                            {selectedVideoUrl ? (
+                              // Video content
+                              <div className="bg-black rounded-xl overflow-hidden">
+                                <div className="aspect-video">
+                                  <iframe
+                                    src={selectedVideoUrl}
+                                    className="w-full h-full"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    title="Property Video"
+                                  />
+                                </div>
+                              </div>
+                            ) : (
+                              // Image content with navigation
+                              <div className="relative">
+                                <div className="aspect-video bg-black rounded-xl overflow-hidden">
+                                  <motion.img
+                                    key={activeImageIndex}
+                                    src={allImages[activeImageIndex]}
+                                    alt={`${property.name} view ${activeImageIndex + 1}`}
+                                    className="w-full h-full object-contain"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.3 }}
+                                  />
+                                </div>
+                                
+                                {/* Navigation arrows */}
+                                {allImages.length > 1 && (
+                                  <>
+                                    <Button
+                                      variant="ghost"
+                                      size="lg"
+                                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-3"
+                                      onClick={() => setActiveImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length)}
+                                    >
+                                      <ArrowLeft className="h-6 w-6" />
+                                    </Button>
+                                    <Button
+                                      variant="ghost"
+                                      size="lg"
+                                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-3"
+                                      onClick={() => setActiveImageIndex((prev) => (prev + 1) % allImages.length)}
+                                    >
+                                      <ArrowRight className="h-6 w-6" />
+                                    </Button>
+                                  </>
+                                )}
+                                
+                                {/* Image counter */}
+                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-md rounded-full px-3 py-1">
+                                  <span className="text-white text-sm font-medium">
+                                    {activeImageIndex + 1} / {allImages.length}
+                                  </span>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {/* Close button */}
+                            <Button
+                              variant="ghost"
+                              size="lg"
+                              className="absolute -top-12 right-0 text-white hover:bg-white/20 rounded-full p-2"
+                              onClick={() => setShowVideoModal(false)}
+                            >
+                              <X className="h-6 w-6" />
+                            </Button>
                           </motion.div>
                         </motion.div>
                       )}

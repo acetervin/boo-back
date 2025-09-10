@@ -378,7 +378,7 @@ Please let me know availability and next steps. Thank you!`;
 
             {/* Step 2: Guest Information */}
             <AnimatePresence>
-              {currentStep >= 2 && (
+              {currentStep >= 2 && paymentMethod && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -451,7 +451,7 @@ Please let me know availability and next steps. Thank you!`;
                         />
                       </div>
 
-                      {canProceedToPayment && (
+                      {canProceedToPayment && paymentMethod && (
                         <Button 
                           onClick={() => setCurrentStep(3)} 
                           className="w-full"
