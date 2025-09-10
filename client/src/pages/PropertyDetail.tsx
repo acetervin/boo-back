@@ -186,6 +186,75 @@ export default function PropertyDetail() {
               </Card>
             </motion.div>
 
+            {/* Mobile Property Highlights & Booking - Only show on small screens */}
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.15 }}
+              className="lg:hidden"
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl">Property Details & Booking</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {/* Property Stats */}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="text-center p-3 bg-muted/50 rounded-lg">
+                      <Users className="h-5 w-5 mx-auto mb-2 text-primary" />
+                      <div className="font-semibold">{property.max_guests}</div>
+                      <div className="text-sm text-muted-foreground">Guests</div>
+                    </div>
+                    <div className="text-center p-3 bg-muted/50 rounded-lg">
+                      <Bed className="h-5 w-5 mx-auto mb-2 text-primary" />
+                      <div className="font-semibold">{property.bedrooms}</div>
+                      <div className="text-sm text-muted-foreground">Bedrooms</div>
+                    </div>
+                    <div className="text-center p-3 bg-muted/50 rounded-lg">
+                      <div className="text-lg font-bold text-primary">
+                        {new Intl.NumberFormat('en-KE', {
+                          style: 'currency',
+                          currency: 'KES',
+                          minimumFractionDigits: 0
+                        }).format(Number(property.price_per_night))}
+                      </div>
+                      <div className="text-xs text-muted-foreground">per night</div>
+                    </div>
+                  </div>
+                  
+                  {/* Booking Button */}
+                  <Button 
+                    onClick={() => window.location.href = `/booking/${property.id}`} 
+                    size="lg" 
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    Proceed to Booking
+                  </Button>
+                  
+                  {/* Contact Info */}
+                  <div className="flex flex-col space-y-2 pt-4 border-t">
+                    <a
+                      href="tel:+254700000000"
+                      className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      +254 700 000 000
+                    </a>
+                    <a
+                      href="mailto:info@kenyaluxuryvillas.com"
+                      className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      info@kenyaluxuryvillas.com
+                    </a>
+                  </div>
+                  
+                  <div className="flex items-start space-x-2 text-sm text-muted-foreground">
+                    <div className="w-4 h-4 bg-primary/20 rounded-full mt-0.5 flex-shrink-0" />
+                    <p>Book with confidence. All payments are secured and your data is protected.</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
             {/* Enhanced Media Section */}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
@@ -347,26 +416,6 @@ export default function PropertyDetail() {
             </motion.div>
 
 
-            {/* Booking Form Section - Moved here */}
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-2xl">Book Your Stay</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <BookingForm
-                    pricePerNight={Number(property.price_per_night)}
-                    propertyId={property.id}
-                    maxGuests={property.max_guests}
-                    bedrooms={property.bedrooms}
-                  />
-                </CardContent>
-              </Card>
-            </motion.div>
 
             {/* Enhanced Amenities */}
             <motion.div
@@ -436,42 +485,20 @@ export default function PropertyDetail() {
             </motion.div>
           </div>
 
-          {/* Quick Property Info Sidebar */}
-          <div className="lg:col-span-2">
+          {/* Desktop Booking Form Sidebar - Only show on large screens */}
+          <div className="hidden lg:block lg:col-span-2">
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5 }}
               className="sticky top-8"
             >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Property Highlights</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-3 bg-muted/50 rounded-lg">
-                      <Users className="h-5 w-5 mx-auto mb-2 text-primary" />
-                      <div className="font-semibold">{property.max_guests}</div>
-                      <div className="text-sm text-muted-foreground">Guests</div>
-                    </div>
-                    <div className="text-center p-3 bg-muted/50 rounded-lg">
-                      <Bed className="h-5 w-5 mx-auto mb-2 text-primary" />
-                      <div className="font-semibold">{property.bedrooms}</div>
-                      <div className="text-sm text-muted-foreground">Bedrooms</div>
-                    </div>
-                  </div>
-                  <div className="text-center pt-4 border-t">
-                    <div className="text-2xl font-bold text-primary">
-                      {new Intl.NumberFormat('en-KE', {
-                        style: 'currency',
-                        currency: 'KES'
-                      }).format(Number(property.price_per_night))}
-                    </div>
-                    <div className="text-sm text-muted-foreground">per night</div>
-                  </div>
-                </CardContent>
-              </Card>
+              <BookingForm
+                pricePerNight={Number(property.price_per_night)}
+                propertyId={property.id}
+                maxGuests={property.max_guests}
+                bedrooms={property.bedrooms}
+              />
             </motion.div>
           </div>
         </div>
