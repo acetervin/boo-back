@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const { Pool } = pg;
-import { type Property, type InsertProperty, type Booking, type InsertBooking, type ContactMessage, type InsertContactMessage, } from "@shared/schema";
+import { type Property, type InsertProperty, type Booking, type InsertBooking, type ContactMessage, type InsertContactMessage, } from "../shared/schema.js";
 
 export class PgStorage {
   private pool: pg.Pool;
