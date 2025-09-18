@@ -45,7 +45,7 @@ export default function LoadingScreen() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <h1 className="text-2xl font-space-grotesk font-semibold text-primary mb-2">
+          <h1 className="text-2xl font-inter font-semibold text-primary mb-2">
             Kenya Luxury Villas
           </h1>
           <p className="text-muted-foreground text-sm">

@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 99%; /* Brighter white background */
+  --background: 35 20% 98%; /* Warm cream white background */
   --foreground: 210 40% 8%; /* Softer dark text */
-  --muted: 210 20% 97%; /* Lighter muted areas */
+  --muted: 35 15% 96%; /* Warm muted areas */
   --muted-foreground: 215 16% 55%; /* Lighter muted text */
-  --popover: 0 0% 100%;
+  --popover: 35 20% 99%;
   --popover-foreground: 210 40% 8%;
-  --card: 0 0% 100%;
+  --card: 35 25% 99%; /* Warm card backgrounds */
   --card-foreground: 210 40% 8%;
-  --border: 214 15% 92%; /* Lighter borders */
-  --input: 214 15% 94%; /* Lighter input backgrounds */
+  --border: 35 15% 90%; /* Warm lighter borders */
+  --input: 35 20% 95%; /* Warm input backgrounds */
   --primary: 188 78% 41%; /* Modern Teal #06b6d4 */
   --primary-foreground: 0 0% 100%;
-  --secondary: 210 20% 98%; /* Much lighter secondary */
+  --secondary: 35 15% 97%; /* Warm lighter secondary */
   --secondary-foreground: 188 78% 41%;
   --accent: 20 90% 48%; /* Warm Coral #f97316 */
   --accent-foreground: 0 0% 100%;
@@ -74,15 +74,11 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-space-grotesk;
+    @apply font-inter font-semibold;
   }
 }
 
 @layer utilities {
-  .font-space-grotesk {
-    font-family: 'Space Grotesk', sans-serif;
-  }
-  
   .font-inter {
     font-family: 'Inter', sans-serif;
   }
