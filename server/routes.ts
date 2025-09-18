@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage } from "./storage.js";
 import { insertContactMessageSchema, insertBookingSchema } from "@shared/schema";
 // import { createPaypalOrder, capturePaypalOrder } from "./paypal";
 //import { loadMpesaSetup, createMpesaOrder, captureMpesaOrder } from "./mpesa";
