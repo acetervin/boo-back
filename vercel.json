@@ -3,14 +3,20 @@
   "builds": [
     {
       "src": "api/index.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "server/**",
+          "shared/**"
+        ]
+      }
     },
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run build:vercel",
-        "distDir": "dist/public"
+        "buildCommand": "vite build",
+        "outputDirectory": "dist/public"
       }
     }
   ],
@@ -23,7 +29,7 @@
       "handle": "filesystem"
     },
     {
-      "src": "/.*",
+      "src": "/(.*)",
       "dest": "/index.html"
     }
   ]
