@@ -44,22 +44,12 @@ export function CurrencyToggle() {
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="sm"
       onClick={toggleCurrency}
-      className="flex items-center space-x-2"
+      className="text-muted-foreground hover:text-foreground transition-colors font-medium px-2 py-1 h-auto"
     >
-      {currency === 'KES' ? (
-        <>
-          <Banknote className="h-4 w-4" />
-          <span>KES</span>
-        </>
-      ) : (
-        <>
-          <DollarSign className="h-4 w-4" />
-          <span>USD</span>
-        </>
-      )}
+      {currency}
     </Button>
   );
 }
