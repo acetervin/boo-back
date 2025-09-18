@@ -2,13 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/vite.config.ts",
-      "use": "@vercel/vite",
+      "src": "package.json",
+      "use": "@vercel/static-build",
       "config": {
-        "project": "client/project.json",
-        "include": [
-          "client/**"
-        ]
+        "buildCommand": "vite build",
+        "outputDirectory": "dist"
       }
     },
     {
@@ -22,8 +20,11 @@
       "dest": "server/index.ts"
     },
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
-      "dest": "client/index.html"
+      "dest": "/index.html"
     }
   ]
 }
