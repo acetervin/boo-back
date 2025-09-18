@@ -3,9 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ArrowLeft, Home } from "lucide-react";
-import ThemeToggle from "./ThemeToggle";
 import { CurrencySwitcher } from "./CurrencySwitcher";
-import { useTheme } from "@/hooks/use-theme";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -18,7 +16,6 @@ const navItems = [
 export default function Navigation() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme } = useTheme();
 
   return (
     <nav className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-40 shadow-sm transition-colors duration-300">
@@ -52,14 +49,12 @@ export default function Navigation() {
             ))}
             <div className="flex items-center space-x-2">
               <CurrencySwitcher />
-              <ThemeToggle />
             </div>
           </div>
 
           {/* Mobile Navigation */}
           <div className="flex md:hidden items-center space-x-2">
             <CurrencySwitcher />
-            <ThemeToggle />
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">

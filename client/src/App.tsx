@@ -60,14 +60,14 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <ThemeProvider>
+      <ThemeProvider defaultTheme="light">
         <LoadingScreen />
       </ThemeProvider>
     );
   }
 
   return (
-    <ThemeProvider>
+    <ThemeProvider defaultTheme="light">
       <QueryClientProvider client={queryClient}>
         <CurrencyProvider>
           <TooltipProvider>

@@ -1,9 +1,15 @@
 import { Link } from "wouter";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { Button } from "@/components/ui/button";
 
 export default function Footer() {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
+
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
   
   return (
     <footer className="bg-card text-foreground border-t border-border py-12">
@@ -93,6 +99,20 @@ export default function Footer() {
               <Link href="/terms">
                 <span className="hover:text-primary transition-colors cursor-pointer">Terms of Service</span>
               </Link>
+              <span className="text-border">|</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleTheme}
+                className="h-6 w-6 p-0 hover:bg-accent rounded-sm"
+                title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {isDark ? (
+                  <Sun className="h-3 w-3" />
+                ) : (
+                  <Moon className="h-3 w-3" />
+                )}
+              </Button>
             </div>
           </div>
         </div>
