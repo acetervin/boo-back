@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LaundryMachine from './icons/LaundryMachine';
 import { Droplet, Wind, Sun, Sparkles } from 'lucide-react';
 
 interface LoadingSpinnerProps {
@@ -142,7 +141,6 @@ const LoadingSpinner = ({ isLoading, setIsLoading }: LoadingSpinnerProps) => {
           }}
           className="w-full h-full"
         >
-          <LaundryMachine />
         </motion.div>
         
         {/* Water effect animation */}
@@ -224,3 +222,4 @@ const LoadingSpinner = ({ isLoading, setIsLoading }: LoadingSpinnerProps) => {
       <WashingPhases phase={loadingPhase} />
     </motion.div>
   );
+}
