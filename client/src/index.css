@@ -5,19 +5,19 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 210 40% 2%;
-  --muted: 210 30% 96%;
-  --muted-foreground: 215 20% 45%;
+  --background: 0 0% 99%; /* Brighter white background */
+  --foreground: 210 40% 8%; /* Softer dark text */
+  --muted: 210 20% 97%; /* Lighter muted areas */
+  --muted-foreground: 215 16% 55%; /* Lighter muted text */
   --popover: 0 0% 100%;
-  --popover-foreground: 210 40% 2%;
+  --popover-foreground: 210 40% 8%;
   --card: 0 0% 100%;
-  --card-foreground: 210 40% 2%;
-  --border: 214 20% 90%;
-  --input: 214 20% 90%;
+  --card-foreground: 210 40% 8%;
+  --border: 214 15% 92%; /* Lighter borders */
+  --input: 214 15% 94%; /* Lighter input backgrounds */
   --primary: 188 78% 41%; /* Modern Teal #06b6d4 */
   --primary-foreground: 0 0% 100%;
-  --secondary: 210 40% 96%;
+  --secondary: 210 20% 98%; /* Much lighter secondary */
   --secondary-foreground: 188 78% 41%;
   --accent: 20 90% 48%; /* Warm Coral #f97316 */
   --accent-foreground: 0 0% 100%;
