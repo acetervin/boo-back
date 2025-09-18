@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ArrowLeft, Home } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import { CurrencyToggle } from "./CurrencySwitcher";
+import { CurrencySwitcher } from "./CurrencySwitcher";
 import { useTheme } from "@/hooks/use-theme";
 
 const navItems = [
@@ -26,7 +26,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/">
-              <h1 className="font-space-grotesk text-2xl font-bold text-foreground cursor-pointer hover:text-primary transition-colors">
+              <h1 className="font-inter text-2xl font-bold text-foreground cursor-pointer hover:text-primary transition-colors">
                 Kairo Kenya
               </h1>
             </Link>
@@ -51,14 +51,14 @@ export default function Navigation() {
               </Link>
             ))}
             <div className="flex items-center space-x-2">
-              <CurrencyToggle />
+              <CurrencySwitcher />
               <ThemeToggle />
             </div>
           </div>
 
           {/* Mobile Navigation */}
           <div className="flex md:hidden items-center space-x-2">
-            <CurrencyToggle />
+            <CurrencySwitcher />
             <ThemeToggle />
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -68,14 +68,6 @@ export default function Navigation() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background">
                 <nav className="flex flex-col gap-4">
-                  <Button
-                    variant="ghost"
-                    className="justify-start"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Close
-                  </Button>
                   {navItems.map((item) => (
                     <Link key={item.href} href={item.href}>
                       <Button

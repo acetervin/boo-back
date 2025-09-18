@@ -11,27 +11,15 @@ export function CurrencySwitcher() {
   };
 
   return (
-    <div className="flex items-center space-x-2">
-      <Select value={currency} onValueChange={handleCurrencyChange}>
-        <SelectTrigger className="w-24">
-          <SelectValue placeholder="Currency" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="KES">
-            <div className="flex items-center space-x-2">
-              <Banknote className="h-4 w-4" />
-              <span>KES</span>
-            </div>
-          </SelectItem>
-          <SelectItem value="USD">
-            <div className="flex items-center space-x-2">
-              <DollarSign className="h-4 w-4" />
-              <span>USD</span>
-            </div>
-          </SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
+    <Select value={currency} onValueChange={handleCurrencyChange}>
+      <SelectTrigger className="w-20 h-8 text-sm">
+        <SelectValue placeholder="Currency" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="KES">KES</SelectItem>
+        <SelectItem value="USD">USD</SelectItem>
+      </SelectContent>
+    </Select>
   );
 }
 
