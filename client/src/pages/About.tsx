@@ -92,7 +92,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="font-playfair text-4xl md:text-5xl font-bold text-deep-navy mb-6">
-              About Kenya Stays
+              About Kairo Kenya
             </h1>
             <p className="text-lg text-gray-700 mb-6">
               We are your premier destination for modern, comfortable stays in Kenya's most vibrant locations.
