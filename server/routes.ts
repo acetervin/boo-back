@@ -9,21 +9,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Properties routes
   app.get("/api/properties", async (req, res) => {
     try {
+      console.log('Fetching properties with query:', req.query);
+      
       const category = req.query.category as string;
       const featured = req.query.featured as string;
 
       let properties;
       if (category) {
+        console.log('Fetching properties by category:', category);
         properties = await storage.getPropertiesByCategory(category);
       } else if (featured === 'true') {
+        console.log('Fetching featured properties');
         properties = await storage.getFeaturedProperties();
       } else {
+        console.log('Fetching all properties');
         properties = await storage.getProperties();
       }
 
+      console.log(`Successfully retrieved ${properties?.length || 0} properties`);
       res.json(properties);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch properties" });
+    } catch (error: any) {
+      console.error('Error fetching properties:', error);
+      res.status(500).json({ 
+        error: "Failed to fetch properties",
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined,
+        code: error.code // Include database error codes if available
+      });
     }
   });
 

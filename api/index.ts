@@ -6,8 +6,21 @@ import { createApp } from '../server/index.js';
 let cachedApp: Express;
 
 export default async function handler(req: any, res: any) {
-  if (!cachedApp) {
-    cachedApp = await createApp();
+  try {
+    if (!cachedApp) {
+      console.log('Initializing server in Vercel environment');
+      console.log('Database URL configured:', !!process.env.DATABASE_URL);
+      console.log('Node ENV:', process.env.NODE_ENV);
+      
+      cachedApp = await createApp();
+      console.log('Server initialized successfully');
+    }
+    return cachedApp(req, res);
+  } catch (error) {
+    console.error('Error in Vercel handler:', error);
+    res.status(500).json({ 
+      error: "Internal Server Error",
+      message: "Failed to initialize server"
+    });
   }
-  return cachedApp(req, res);
 }
