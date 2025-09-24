@@ -5,7 +5,7 @@ import { insertContactMessageSchema, insertBookingSchema } from "../shared/schem
 // import { createPaypalOrder, capturePaypalOrder } from "./paypal";
 //import { loadMpesaSetup, createMpesaOrder, captureMpesaOrder } from "./mpesa";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   // Properties routes
   app.get("/api/properties", async (req, res) => {
     try {
@@ -141,6 +141,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
 
-  const httpServer = createServer(app);
-  return httpServer;
+  // No need to create HTTP server in serverless environment
+  return;
 }
