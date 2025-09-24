@@ -8,6 +8,15 @@ import { serveStatic, log } from "./vite.js";
 export async function createApp(): Promise<Express> {
     const app = express();
 
+    // Test database connection
+    try {
+        const { pool } = await import('./db.js');
+        await pool.query('SELECT NOW()');
+        console.log('Database connection successful');
+    } catch (error) {
+        console.error('Database connection failed:', error);
+    }
+
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
