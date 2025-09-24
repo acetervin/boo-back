@@ -1,25 +1,53 @@
-import pg from "pg";
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import ws from 'ws';
 import dotenv from "dotenv";
 dotenv.config();
 
-const { Pool } = pg;
 import { type Property, type InsertProperty, type Booking, type InsertBooking, type ContactMessage, type InsertContactMessage, } from "../shared/schema.js";
 
+// Configure Neon for serverless environment
+neonConfig.webSocketConstructor = ws;
+
 export class PgStorage {
-  private pool: pg.Pool;
+  private pool: Pool;
 
   constructor() {
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL is not set');
+    }
+
     this.pool = new Pool({
       connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false },
-      idleTimeoutMillis: 30000 // 30 seconds
+      ssl: {
+        rejectUnauthorized: false
+      },
+      idleTimeoutMillis: 30000, // 30 seconds
+      max: 1, // Use a single connection in serverless
+      connectionTimeoutMillis: 5000 // 5 second connection timeout
+    });
+
+    // Log pool errors
+    this.pool.on('error', (err) => {
+      console.error('Unexpected error on idle client', err);
     });
   }
 
   // Properties
   async getProperties(): Promise<Property[]> {
-    const res = await this.pool.query("SELECT * FROM properties WHERE is_active = true");
-    return res.rows;
+    try {
+      console.log('Attempting to fetch properties from database');
+      const res = await this.pool.query("SELECT * FROM properties WHERE is_active = true");
+      console.log(`Successfully fetched ${res.rows.length} properties`);
+      return res.rows;
+    } catch (error: unknown) {
+      console.error('Error fetching properties:', error);
+      // Rethrow the error with more context
+      if (error instanceof Error) {
+        throw new Error(`Database query failed: ${error.message}`);
+      } else {
+        throw new Error(`Database query failed: ${String(error)}`);
+      }
+    }
   }
 
   async getProperty(id: number): Promise<Property | undefined> {
