@@ -60,7 +60,10 @@ export async function createApp(): Promise<Express> {
     });
 
     // For Vercel deployment, we serve the static frontend files.
-    serveStatic(app);
+    // Only serve static in development or if dist exists (not in serverless)
+    if (process.env.NODE_ENV !== 'production') {
+        serveStatic(app);
+    }
 
     return app;
 }
