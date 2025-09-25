@@ -1,5 +1,5 @@
 import { type Express } from 'express';
-import { createApp } from '../server/index';
+import { createApp } from '../dist/index.js';
 
 // This file serves as the entry point for the Vercel serverless function.
 // It creates the app instance on the first request and caches it for subsequent ones.
@@ -28,13 +28,9 @@ export default async function handler(req: any, res: any) {
     // Ensure we always send a response even if there's an error
     res.status(500).json({
       error: 'Internal Server Error',
-      message: process.env.NODE_ENV === 'development' ? 
-        error instanceof Error ? error.message : String(error) : 
-        undefined
-    });
-    res.status(500).json({ 
-      error: "Internal Server Error",
-      message: "Failed to initialize server"
+      message: process.env.NODE_ENV === 'development' ?
+        error instanceof Error ? error.message : String(error) :
+        'Failed to initialize server'
     });
   }
 }
