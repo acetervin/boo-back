@@ -11,7 +11,7 @@ if (!process.env.DB_URL) {
   throw new Error("DB_URL must be set. Did you forget to provision a database?");
 }
 
-// Create pool with specific SSL and timeout settings for serverless
+// Create pool with specific SSL and timeout settings for serverless yeenvironments
 export const pool = new Pool({
   connectionString: process.env.DB_URL,
   ssl: {
