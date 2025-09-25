@@ -1,4 +1,5 @@
 import { type Express } from 'express';
+// @ts-ignore - dist/index.js is built at deployment time
 import { createApp } from '../dist/index.js';
 
 // This file serves as the entry point for the Vercel serverless function.
@@ -15,7 +16,7 @@ export default async function handler(req: any, res: any) {
       // Cache only in development
       if (!cachedApp) {
         console.log('Initializing server in development environment');
-        console.log('Database URL configured:', !!process.env.DATABASE_URL);
+        console.log('Database URL configured:', !!process.env.DB_URL);
         console.log('Node ENV:', process.env.NODE_ENV);
         
         cachedApp = await createApp();

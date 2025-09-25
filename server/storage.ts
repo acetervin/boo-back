@@ -12,12 +12,12 @@ export class PgStorage {
   private pool: Pool;
 
   constructor() {
-    if (!process.env.DATABASE_URL) {
-      throw new Error('DATABASE_URL is not set');
+    if (!process.env.DB_URL) {
+      throw new Error('DB_URL is not set');
     }
 
     this.pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.DB_URL,
       ssl: {
         rejectUnauthorized: false
       },

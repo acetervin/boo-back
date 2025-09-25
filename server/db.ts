@@ -7,13 +7,13 @@ import * as schema from "@shared/schema";
 neonConfig.webSocketConstructor = ws;
 
 // Validate database URL
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL must be set. Did you forget to provision a database?");
+if (!process.env.DB_URL) {
+  throw new Error("DB_URL must be set. Did you forget to provision a database?");
 }
 
 // Create pool with specific SSL and timeout settings for serverless
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DB_URL,
   ssl: {
     rejectUnauthorized: false // Required for some hosting environments
   },
