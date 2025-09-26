@@ -1,63 +1,15 @@
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
 import { MessageCircle, Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube, Shield, Smartphone, CreditCard, DollarSign } from "lucide-react";
 import type { InsertContactMessage } from "@shared/schema";
 import { useTheme } from "@/hooks/use-theme";
 import { motion } from "framer-motion";
 
 export default function Contact() {
-  const { toast } = useToast();
   const { theme } = useTheme();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    propertyInterest: "",
-    message: "",
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: (data: InsertContactMessage) => 
-      apiRequest("POST", "/api/contact", data),
-    onSuccess: () => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for your message! We will get back to you soon.",
-      });
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        propertyInterest: "",
-        message: "",
-      });
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    contactMutation.mutate(formData);
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
 
   return (
     <motion.div
@@ -80,7 +32,7 @@ export default function Contact() {
           {/* Contact Form */}
           <Card className="bg-card border-border hover:shadow-md transition-all duration-300">
             <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="firstName" className="text-sm font-medium text-foreground">
@@ -88,10 +40,8 @@ export default function Contact() {
                     </label>
                     <Input
                       id="firstName"
-                      value={formData.firstName}
-                      onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
                       className="bg-background border-border focus:ring-primary"
-                      required
+                      disabled
                     />
                   </div>
                   <div className="space-y-2">
@@ -100,10 +50,8 @@ export default function Contact() {
                     </label>
                     <Input
                       id="lastName"
-                      value={formData.lastName}
-                      onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
                       className="bg-background border-border focus:ring-primary"
-                      required
+                      disabled
                     />
                   </div>
                 </div>
@@ -115,10 +63,8 @@ export default function Contact() {
                   <Input
                     id="email"
                     type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                     className="bg-background border-border focus:ring-primary"
-                    required
+                    disabled
                   />
                 </div>
 
@@ -129,10 +75,8 @@ export default function Contact() {
                   <Input
                     id="phone"
                     type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                     className="bg-background border-border focus:ring-primary"
-                    required
+                    disabled
                   />
                 </div>
 
@@ -141,8 +85,7 @@ export default function Contact() {
                     Interested In
                   </label>
                   <Select
-                    value={formData.propertyInterest}
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, propertyInterest: value }))}
+                    disabled
                   >
                     <SelectTrigger id="propertyInterest" className="bg-background border-border">
                       <SelectValue placeholder="Select property type" />
@@ -161,19 +104,17 @@ export default function Contact() {
                   </label>
                   <Textarea
                     id="message"
-                    value={formData.message}
-                    onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
                     className="bg-background border-border focus:ring-primary min-h-[150px]"
-                    required
+                    disabled
                   />
                 </div>
 
                 <Button 
                   type="submit" 
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                  disabled={contactMutation.isPending}
+                  disabled
                 >
-                  {contactMutation.isPending ? "Sending..." : "Send Message"}
+                  Message
                 </Button>
               </form>
             </CardContent>

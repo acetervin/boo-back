@@ -3,8 +3,8 @@ import { Binoculars, Ship, Mountain, Users, Egg, Plane } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import Masonry from "react-masonry-css";
 import { useQuery } from "@tanstack/react-query";
-import { queryClient } from "@/lib/queryClient";
 import { useState, useEffect } from "react";
+import { getProperties } from "@/data/properties";
 
 const iconMap: Record<string, any> = {
   binoculars: Binoculars,
@@ -27,12 +27,8 @@ export default function Gallery() {
 
   // Fetch all properties
   const { data: properties, isLoading } = useQuery({
-    queryKey: ["/api/properties"],
-    queryFn: async () => {
-      const res = await fetch("/api/properties");
-      if (!res.ok) throw new Error("Failed to fetch properties");
-      return res.json();
-    },
+    queryKey: ["properties"],
+    queryFn: () => getProperties(),
     refetchOnWindowFocus: false,
   });
 

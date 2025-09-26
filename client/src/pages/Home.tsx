@@ -6,6 +6,7 @@ import PropertySkeleton from "@/components/ui/PropertySkeleton";
 import { ChevronRight, Building2, Home as HomeIcon, Castle } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Property } from "@shared/schema";
+import { getProperties } from "@/data/properties";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -15,18 +16,18 @@ const fadeInUp = {
 
 export default function Home() {
   const { data: apartments, isLoading: apartmentsLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties", { category: "apartments" }],
-    queryFn: () => fetch("/api/properties?category=apartments").then(res => res.json()),
+    queryKey: ["properties", { category: "apartments" }],
+    queryFn: () => getProperties("apartments"),
   });
 
   const { data: villas, isLoading: villasLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties", { category: "villas" }],
-    queryFn: () => fetch("/api/properties?category=villas").then(res => res.json()),
+    queryKey: ["properties", { category: "villas" }],
+    queryFn: () => getProperties("villas"),
   });
 
   const { data: houses, isLoading: housesLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties", { category: "houses" }],
-    queryFn: () => fetch("/api/properties?category=houses").then(res => res.json()),
+    queryKey: ["properties", { category: "houses" }],
+    queryFn: () => getProperties("houses"),
   });
 
   const isInitialLoading = apartmentsLoading && villasLoading && housesLoading;
