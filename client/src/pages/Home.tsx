@@ -17,17 +17,17 @@ const fadeInUp = {
 export default function Home() {
   const { data: apartments, isLoading: apartmentsLoading } = useQuery<Property[]>({
     queryKey: ["properties", { category: "apartments" }],
-    queryFn: () => getProperties("apartments"),
+    queryFn: () => Promise.resolve(getProperties("apartments")),
   });
 
   const { data: villas, isLoading: villasLoading } = useQuery<Property[]>({
     queryKey: ["properties", { category: "villas" }],
-    queryFn: () => getProperties("villas"),
+    queryFn: () => Promise.resolve(getProperties("villas")),
   });
 
   const { data: houses, isLoading: housesLoading } = useQuery<Property[]>({
     queryKey: ["properties", { category: "houses" }],
-    queryFn: () => getProperties("houses"),
+    queryFn: () => Promise.resolve(getProperties("houses")),
   });
 
   const isInitialLoading = apartmentsLoading && villasLoading && housesLoading;

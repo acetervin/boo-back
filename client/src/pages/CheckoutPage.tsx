@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useRoute, Link } from 'wouter';
-import { useQuery } from '@tanstack/react-query';
+import { useParams, Link } from "wouter";
+import { getProperty } from "@/data/properties";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -49,10 +49,20 @@ export default function CheckoutPage() {
     specialRequests: '',
   });
 
-  const { data: property, isLoading } = useQuery<Property>({
-    queryKey: [`/api/properties/${propertyId}`],
-    enabled: !!propertyId,
-  });
+  const [property, setProperty] = useState<Property | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    try {
+      const prop = getProperty(propertyId as number);
+      setProperty(prop);
+    } catch (e) {
+      setError(e as Error);
+    }
+    setIsLoading(false);
+  }, [propertyId]);
 
   useEffect(() => {
     if (!bookingDetails) {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +26,7 @@ import CategoryGallery from "../components/CategoryGallery";
 import { BookingForm } from "@/components/BookingForm";
 import type { Property } from "@shared/schema";
 import { motion } from "framer-motion";
+import { getProperty } from "@/data/properties";
 
 // Icon mapping object
 const iconMap: Record<string, any> = {
@@ -61,14 +61,26 @@ export default function PropertyDetail() {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [selectedVideoUrl, setSelectedVideoUrl] = useState("");
 
-  const {
-    data: property,
-    isLoading,
-    error,
-  } = useQuery<Property>({
-    queryKey: [`/api/properties/${propertyId}`],
-    enabled: !!propertyId,
-  });
+  const [property, setProperty] = useState<Property | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const fetchProperty = async () => {
+      setIsLoading(true);
+      try {
+        const prop = await getProperty(propertyId as number);
+        setProperty(prop);
+      } catch (e) {
+        setError(e as Error);
+      }
+      setIsLoading(false);
+    };
+
+    if (propertyId) {
+      fetchProperty();
+    }
+  }, [propertyId]);
 
   // Sample video URLs - in real implementation these could come from property data or be configurable
   const propertyVideos = property
@@ -142,11 +154,7 @@ export default function PropertyDetail() {
       <div className="relative h-[75vh] overflow-hidden">
         <motion.img
           key={activeImageIndex}
-          src={
-            allImages[activeImageIndex] ||
-            property.main_image_url ||
-            property.image_url
-          }
+          src={property.main_image_url || property.image_url}
           alt={property.name}
           className="w-full h-full object-cover"
           initial={{ scale: 1.05, opacity: 0 }}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useRoute, Link } from 'wouter';
-import { useQuery } from '@tanstack/react-query';
+import { useParams, Link } from "wouter";
+import { getProperty } from "@/data/properties";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -24,7 +24,7 @@ import { useToast } from '@/hooks/use-toast';
 import type { Property } from '@shared/schema';
 
 export default function PaymentPage() {
-  const [, params] = useRoute('/payment/:id');
+  const params = useParams();
   const propertyId = params?.id ? parseInt(params.id) : null;
   const { formatPrice, convertPrice, currency } = useCurrency();
   const { toast } = useToast();
@@ -34,10 +34,20 @@ export default function PaymentPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
-  const { data: property, isLoading } = useQuery<Property>({
-    queryKey: [`/api/properties/${propertyId}`],
-    enabled: !!propertyId,
-  });
+  const [property, setProperty] = useState<Property | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    try {
+      const prop = getProperty(propertyId as number);
+      setProperty(prop);
+    } catch (e) {
+      setError(e as Error);
+    }
+    setIsLoading(false);
+  }, [propertyId]);
 
   useEffect(() => {
     const stored = localStorage.getItem('guest-info');

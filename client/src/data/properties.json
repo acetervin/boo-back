@@ -1,0 +1,67 @@
+
+[
+  {
+    "id": 247,
+    "name": "Naivasha Lakeside Retreat",
+    "description": "Serene lakeside villa with mountain views at Lake Naivasha. Ideal for relaxation and water activities with boat dock access.",
+    "location": "Lake Naivasha, Nakuru",
+    "price_per_night": 50000,
+    "max_guests": 8,
+    "bedrooms": 4,
+    "image_url": "https://media.joomeo.com/large/68761b66ae4ae.jpg",
+    "amenities": ["Wi-Fi", "Fishing", "Game Drives", "Boat Dock", "Kitchen", "Fireplace"],
+    "featured": true,
+    "category": "houses",
+    "images": [],
+    "main_image_url": "https://media.joomeo.com/large/68d6f0365205f.jpg",
+    "is_active": true
+  },
+  {
+    "id": 239,
+    "name": "Padmore Residence Apartment",
+    "description": "Modern luxury apartment in Westlands with premium finishes, rooftop terrace, and stunning city views. Perfect for business travelers and urban stays.",
+    "location": "Kilimani, George Padmore Road, Nairobi",
+    "price_per_night": 8500,
+    "max_guests": 6,
+    "bedrooms": 4,
+    "image_url": "https://media.joomeo.com/large/687567548d85e.jpg",
+    "amenities": ["Wi-Fi", "Gym Access", "Parking", "City View"],
+    "featured": true,
+    "category": "apartments",
+    "images": [],
+    "main_image_url": "https://media.joomeo.com/large/687556b842e5c.jpg",
+    "is_active": true
+  },
+  {
+    "id": 240,
+    "name": "Karen Heights Apartment",
+    "description": "Elegant apartment in upscale Karen with garden views, modern furnishings, and access to exclusive amenities.",
+    "location": "Karen, Nairobi",
+    "price_per_night": 12000,
+    "max_guests": 6,
+    "bedrooms": 3,
+    "image_url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "amenities": ["Wi-Fi", "Garden View", "Balcony", "Kitchen"],
+    "featured": false,
+    "category": "apartments",
+    "images": [],
+    "main_image_url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "is_active": true
+  },
+  {
+    "id": 241,
+    "name": "Ocean Paradise Villa",
+    "description": "Stunning beachfront villa with infinity pool overlooking the Indian Ocean at Diani Beach. Perfect for families and groups seeking luxury by the sea.",
+    "location": "Diani Beach, Kwale",
+    "price_per_night": 25000,
+    "max_guests": 8,
+    "bedrooms": 4,
+    "image_url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "amenities": ["Private Beach", "Infinity Pool", "Ocean View", "Wi-Fi", "AC", "Private Chef"],
+    "featured": true,
+    "category": "villas",
+    "images": [],
+    "main_image_url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "is_active": true
+  }
+]

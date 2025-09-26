@@ -1,0 +1,476 @@
+[
+  {
+    "id": 2,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/6874ec500177f.jpg"
+  },
+  {
+    "id": 3,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/687559e91a5c1.jpg"
+  },
+  {
+    "id": 4,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755e129d256.jpg"
+  },
+  {
+    "id": 5,
+    "property_id": 247,
+    "category": "Bedroom",
+    "image_url": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "id": 65,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6efd4c20fb.jpg"
+  },
+  {
+    "id": 66,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f01bb8e65.jpg"
+  },
+  {
+    "id": 67,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f028a1a95.jpg"
+  },
+  {
+    "id": 68,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0365205f.jpg"
+  },
+  {
+    "id": 69,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f041f1091.jpg"
+  },
+  {
+    "id": 70,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f04d135b7.jpg"
+  },
+  {
+    "id": 71,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/6897abd739f02.jpg"
+  },
+  {
+    "id": 72,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f07921a79.jpg"
+  },
+  {
+    "id": 73,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f08455cb9.jpg"
+  },
+  {
+    "id": 74,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f08e9b8c9.jpg"
+  },
+  {
+    "id": 75,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0a13b788.jpg"
+  },
+  {
+    "id": 76,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0af66fa4.jpg"
+  },
+  {
+    "id": 77,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0c00a714.jpg"
+  },
+  {
+    "id": 78,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0ccd2cbe.jpg"
+  },
+  {
+    "id": 79,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0ea035d0.jpg"
+  },
+  {
+    "id": 80,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0de585f0.jpg"
+  },
+  {
+    "id": 81,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f0f819f2e.jpg"
+  },
+  {
+    "id": 82,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f105356a7.jpg"
+  },
+  {
+    "id": 83,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f112bfa3a.jpg"
+  },
+  {
+    "id": 84,
+    "property_id": 247,
+    "category": "Exterior",
+    "image_url": "https://media.joomeo.com/large/68d6f1259fbd8.jpg"
+  },
+  {
+    "id": 7,
+    "property_id": 239,
+    "category": "Balcony",
+    "image_url": "https://media.joomeo.com/large/687551330fe59.jpg"
+  },
+  {
+    "id": 8,
+    "property_id": 239,
+    "category": "Balcony",
+    "image_url": "https://media.joomeo.com/large/687551e2c5020.jpg"
+  },
+  {
+    "id": 9,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/687552718ae35.jpg"
+  },
+  {
+    "id": 10,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/6875539b89bea.jpg"
+  },
+  {
+    "id": 11,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/6874bb77d157c.jpg"
+  },
+  {
+    "id": 12,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/68755353e38de.jpg"
+  },
+  {
+    "id": 13,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/68755323530b5.jpg"
+  },
+  {
+    "id": 14,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/687553740b756.jpg"
+  },
+  {
+    "id": 15,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/687552cf7be25.jpg"
+  },
+  {
+    "id": 16,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/68755446ef7fb.jpg"
+  },
+  {
+    "id": 17,
+    "property_id": 239,
+    "category": "Amenities",
+    "image_url": "https://media.joomeo.com/large/68755826472c7.jpg"
+  },
+  {
+    "id": 18,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/6875594e957b2.jpg"
+  },
+  {
+    "id": 19,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/687559b1aab84.jpg"
+  },
+  {
+    "id": 20,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/687559678189a.jpg"
+  },
+  {
+    "id": 21,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/6875574ba7b76.jpg"
+  },
+  {
+    "id": 22,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/687558b401dc1.jpg"
+  },
+  {
+    "id": 23,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/687559678189a.jpg"
+  },
+  {
+    "id": 24,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/6874ec500177f.jpg"
+  },
+  {
+    "id": 25,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/68755a22c7c1f.jpg"
+  },
+  {
+    "id": 26,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/68755b39ccf31.jpg"
+  },
+  {
+    "id": 27,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/68755bb3e25d1.jpg"
+  },
+  {
+    "id": 28,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/68755c5d49393.jpg"
+  },
+  {
+    "id": 29,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/68755c2e9d424.jpg"
+  },
+  {
+    "id": 30,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755debd4739.jpg"
+  },
+  {
+    "id": 31,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755db65b929.jpg"
+  },
+  {
+    "id": 32,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755da8c026b.jpg"
+  },
+  {
+    "id": 33,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755e404cf61.jpg"
+  },
+  {
+    "id": 34,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755e6447f6b.jpg"
+  },
+  {
+    "id": 35,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755e8165922.jpg"
+  },
+  {
+    "id": 36,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68755e9c88d15.jpg"
+  },
+  {
+    "id": 38,
+    "property_id": 239,
+    "category": "Bathrooms",
+    "image_url": "https://media.joomeo.com/large/68755f913b0ab.jpg"
+  },
+  {
+    "id": 39,
+    "property_id": 239,
+    "category": "Bathrooms",
+    "image_url": "https://media.joomeo.com/large/68755fef4f311.jpg"
+  },
+  {
+    "id": 40,
+    "property_id": 239,
+    "category": "Bathrooms",
+    "image_url": "https://media.joomeo.com/large/68755fe1acd32.jpg"
+  },
+  {
+    "id": 41,
+    "property_id": 239,
+    "category": "Bathrooms",
+    "image_url": "https://media.joomeo.com/large/68755fb07a61e.jpg"
+  },
+  {
+    "id": 42,
+    "property_id": 239,
+    "category": "Bathrooms",
+    "image_url": "https://media.joomeo.com/large/68755fc656b4d.jpg"
+  },
+  {
+    "id": 43,
+    "property_id": 239,
+    "category": "Bathrooms",
+    "image_url": "https://media.joomeo.com/large/687559346fc19.jpg"
+  },
+  {
+    "id": 44,
+    "property_id": 239,
+    "category": "Kitchen",
+    "image_url": "https://media.joomeo.com/large/6875607d7203a.jpg"
+  },
+  {
+    "id": 45,
+    "property_id": 239,
+    "category": "Dinning",
+    "image_url": "https://media.joomeo.com/large/68755debd4739.jpg"
+  },
+  {
+    "id": 46,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/687560cfd3b93.jpg"
+  },
+  {
+    "id": 47,
+    "property_id": 239,
+    "category": "Dinning",
+    "image_url": "https://media.joomeo.com/large/68756178430cb.jpg"
+  },
+  {
+    "id": 48,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/6875611a30187.jpg"
+  },
+  {
+    "id": 49,
+    "property_id": 239,
+    "category": "Kitchen",
+    "image_url": "https://media.joomeo.com/large/687560a6eaa0c.jpg"
+  },
+  {
+    "id": 50,
+    "property_id": 239,
+    "category": "Dinning",
+    "image_url": "https://media.joomeo.com/large/6875612947986.jpg"
+  },
+  {
+    "id": 51,
+    "property_id": 239,
+    "category": "Kitchen",
+    "image_url": "https://media.joomeo.com/large/68756089ecb16.jpg"
+  },
+  {
+    "id": 52,
+    "property_id": 239,
+    "category": "Kitchen",
+    "image_url": "https://media.joomeo.com/large/6875609a727cc.jpg"
+  },
+  {
+    "id": 53,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/6875673d16abd.jpg"
+  },
+  {
+    "id": 54,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/6875676541d2d.jpg"
+  },
+  {
+    "id": 55,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68756785c1381.jpg"
+  },
+  {
+    "id": 56,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/6875670baf046.jpg"
+  },
+  {
+    "id": 57,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/68756774ee7a8.jpg"
+  },
+  {
+    "id": 58,
+    "property_id": 239,
+    "category": "Living Room",
+    "image_url": "https://media.joomeo.com/large/687567548d85e.jpg"
+  },
+  {
+    "id": 59,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/68756832dbea2.jpg"
+  },
+  {
+    "id": 60,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/6875684056984.jpg"
+  },
+  {
+    "id": 61,
+    "property_id": 239,
+    "category": "Bedroom",
+    "image_url": "https://media.joomeo.com/large/6875681e384ab.jpg"
+  },
+  {
+    "id": 62,
+    "property_id": 239,
+    "category": "Balcony",
+    "image_url": "https://media.joomeo.com/large/6875687ed6d79.jpg"
+  }
+]

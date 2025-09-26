@@ -28,7 +28,7 @@ export default function Gallery() {
   // Fetch all properties
   const { data: properties, isLoading } = useQuery({
     queryKey: ["properties"],
-    queryFn: () => getProperties(),
+    queryFn: () => Promise.resolve(getProperties()),
     refetchOnWindowFocus: false,
   });
 

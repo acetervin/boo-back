@@ -32,6 +32,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useToast } from "@/hooks/use-toast";
 import GuestSelectionPopover from "@/components/GuestSelectionPopover";
 import type { Property } from "@shared/schema";
+import { getProperty } from "@/data/properties";
 import { motion, AnimatePresence } from "framer-motion";
 
 const unavailableDates = [
@@ -74,10 +75,26 @@ export default function BookingPage() {
   const [selectedPaymentType, setSelectedPaymentType] = useState<'paypal' | 'mpesa'>('paypal');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const { data: property, isLoading, error } = useQuery<Property>({
-    queryKey: [`/api/properties/${propertyId}`],
-    enabled: !!propertyId,
-  });
+  const [property, setProperty] = useState<Property | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const fetchProperty = () => {
+      setIsLoading(true);
+      try {
+        const prop = getProperty(propertyId as number);
+        setProperty(prop);
+      } catch (e) {
+        setError(e as Error);
+      }
+      setIsLoading(false);
+    };
+
+    if (propertyId) {
+      fetchProperty();
+    }
+  }, [propertyId]);
 
   useEffect(() => {
     if (date?.from) {

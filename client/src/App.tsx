@@ -1,11 +1,11 @@
 import { Switch, Route } from "wouter";
 import React from "react";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@/lib/queryClient';
 import LoadingScreen from "@/components/LoadingScreen";
 import Home from "@/pages/Home";
 import Properties from "@/pages/Properties";
@@ -67,24 +67,24 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider defaultTheme="light">
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <CurrencyProvider>
           <TooltipProvider>
-            <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-              <Navigation />
-              <ScrollToTop />
-              <main className="relative">
+            <div className="relative min-h-screen">
+              <main>
+                <Navigation />
                 <BackButton />
                 <Router />
                 <StickyContactButtons />
+                <ScrollToTop />
               </main>
               <Footer />
-              <Toaster />
             </div>
+            <Toaster />
           </TooltipProvider>
         </CurrencyProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

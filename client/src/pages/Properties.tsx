@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import PropertyCard from "@/components/PropertyCard";
@@ -8,6 +7,7 @@ import { propertyCategories } from "@/data/properties";
 import type { Property } from "@shared/schema";
 import { useTheme } from "@/hooks/use-theme";
 import { motion } from "framer-motion";
+import { getProperties } from "@/data/properties";
 
 export default function Properties() {
   const [location] = useLocation();
@@ -17,17 +17,21 @@ export default function Properties() {
   
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
-  const { data: properties, isLoading } = useQuery<Property[]>({
-    queryKey: selectedCategory === 'all' 
-      ? ["/api/properties"] 
-      : ["/api/properties", { category: selectedCategory }],
-    queryFn: () => {
-      const url = selectedCategory === 'all' 
-        ? "/api/properties" 
-        : `/api/properties?category=${selectedCategory}`;
-      return fetch(url).then(res => res.json());
-    },
-  });
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      setIsLoading(true);
+      const props = await getProperties(selectedCategory === 'all' ? undefined : selectedCategory);
+      setProperties(props);
+      setIsLoading(false);
+      console.log('Properties:', props);
+      console.log('Is Loading:', false);
+    };
+
+    fetchProperties();
+  }, [selectedCategory]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
