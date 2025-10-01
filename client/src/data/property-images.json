@@ -20,7 +20,7 @@
   {
     "id": 5,
     "property_id": 247,
-    "category": "Bedroom",
+    "category": "Interior",
     "image_url": "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=400&q=80"
   },
   {
@@ -472,5 +472,41 @@
     "property_id": 239,
     "category": "Balcony",
     "image_url": "https://media.joomeo.com/large/6875687ed6d79.jpg"
+  },
+  {
+    "id": 85,
+    "property_id": 240,
+    "category": "Interior",
+    "image_url": "https://media.joomeo.com/large/68dd2dd0e35e0.jpg"
+  },
+  {
+    "id": 86,
+    "property_id": 240,
+    "category": "Interior",
+    "image_url": "https://media.joomeo.com/large/68dd30c4dbf82.jpg"
+  },
+  {
+    "id": 87,
+    "property_id": 240,
+    "category": "Interior",
+    "image_url": "https://media.joomeo.com/large/68dd30d57afa9.jpg"
+  },
+  {
+    "id": 88,
+    "property_id": 240,
+    "category": "Interior",
+    "image_url": "https://media.joomeo.com/large/68dd30e7a1cee.jpg"
+  },
+  {
+    "id": 89,
+    "property_id": 240,
+    "category": "Interior",
+    "image_url": "https://media.joomeo.com/large/68dd30f92923c.jpg"
+  },
+  {
+    "id": 90,
+    "property_id": 240,
+    "category": "Interior",
+    "image_url": "https://media.joomeo.com/large/68dd2e6825ce1.jpg"
   }
 ]

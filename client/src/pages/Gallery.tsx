@@ -5,6 +5,7 @@ import Masonry from "react-masonry-css";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { getProperties } from "@/data/properties";
+import { useLocation } from "wouter";
 
 const iconMap: Record<string, any> = {
   binoculars: Binoculars,
@@ -33,16 +34,27 @@ export default function Gallery() {
   });
 
   // Store selected images in state so they don't change on theme toggle
-  const [masonryImages, setMasonryImages] = useState<{ url: string; title: string }[]>([]);
+  const [masonryImages, setMasonryImages] = useState<{ url: string; title: string; propertyId: number }[]>([]);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     if (properties && Array.isArray(properties) && masonryImages.length === 0) {
-      let allImages: { url: string; title: string }[] = [];
+      let allImages: { url: string; title: string; propertyId: number }[] = [];
       properties.forEach((prop: any) => {
-        if (prop.image_url) allImages.push({ url: prop.image_url, title: prop.name });
+        if (prop.image_url) {
+          allImages.push({ 
+            url: prop.image_url, 
+            title: prop.name,
+            propertyId: prop.id
+          });
+        }
         if (Array.isArray(prop.images)) {
           prop.images.forEach((img: string, idx: number) => {
-            allImages.push({ url: img, title: `${prop.name} #${idx + 1}` });
+            allImages.push({ 
+              url: img, 
+              title: `${prop.name} #${idx + 1}`,
+              propertyId: prop.id
+            });
           });
         }
       });
@@ -66,10 +78,11 @@ export default function Gallery() {
             className="flex gap-6"
             columnClassName="masonry-column"
           >
-            {masonryImages.map((img: { url: string; title: string }, i: number) => (
+            {masonryImages.map((img: { url: string; title: string; propertyId: number }, i: number) => (
               <div
                 key={i}
-                className="mb-6 rounded-xl overflow-hidden bg-card shadow-lg group transform transition duration-700 hover:scale-105 hover:shadow-2xl"
+                onClick={() => setLocation(`/properties/${img.propertyId}`)}
+                className="mb-6 rounded-xl overflow-hidden bg-card shadow-lg group transform transition duration-700 hover:scale-105 hover:shadow-2xl cursor-pointer"
               >
                 <img
                   src={img.url}

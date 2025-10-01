@@ -18,7 +18,7 @@
   },
   {
     "id": 239,
-    "name": "Padmore Residence Apartment",
+    "name": "Padmore Residence Apartment One",
     "description": "Modern luxury apartment in Westlands with premium finishes, rooftop terrace, and stunning city views. Perfect for business travelers and urban stays.",
     "location": "Kilimani, George Padmore Road, Nairobi",
     "price_per_night": 8500,
@@ -34,19 +34,19 @@
   },
   {
     "id": 240,
-    "name": "Karen Heights Apartment",
+    "name": "Padmore Residence Apartment Two",
     "description": "Elegant apartment in upscale Karen with garden views, modern furnishings, and access to exclusive amenities.",
-    "location": "Karen, Nairobi",
-    "price_per_night": 12000,
-    "max_guests": 6,
-    "bedrooms": 3,
-    "image_url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "location": "Kilimani, George Padmore Road, Nairobi",
+    "price_per_night": 5500,
+    "max_guests": 3,
+    "bedrooms": 2,
+    "image_url": "https://media.joomeo.com/large/68dd2dd0e35e0.jpg",
     "amenities": ["Wi-Fi", "Garden View", "Balcony", "Kitchen"],
     "featured": false,
     "category": "apartments",
     "images": [],
-    "main_image_url": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    "is_active": false
+    "main_image_url": "https://media.joomeo.com/large/68dd2e6825ce1.jpg",
+    "is_active": true
   },
   {
     "id": 241,
@@ -62,6 +62,6 @@
     "category": "villas",
     "images": [],
     "main_image_url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    "is_active": true
+    "is_active": false
   }
 ]
