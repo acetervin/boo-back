@@ -15,7 +15,7 @@ export const propertyCategories = [
 ];
 
 export function getProperties(category?: string, featured?: boolean): Property[] {
-  let filteredProperties = properties;
+  let filteredProperties = properties.filter(p => p.is_active);
 
   if (category) {
     filteredProperties = filteredProperties.filter(p => p.category === category);
@@ -43,7 +43,7 @@ export function getProperties(category?: string, featured?: boolean): Property[]
 
 export function getProperty(id: number): Property | undefined {
   const property = properties.find(p => p.id === id);
-  if (!property) {
+  if (!property || !property.is_active) {
     return undefined;
   }
 
